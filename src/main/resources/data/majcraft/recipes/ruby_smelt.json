@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "majcraft:ruby_block"
+  },
+  "result": "majcraft:ruby",
+  "experience": 1.0,
+  "cookingtime": 200
+}

@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "/ /",
+        "/ /"
+    ],
+    "key": {
+        "#": {
+            "item": "majcraft:wire_mesh"
+        },
+        "/": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+        "item": "majcraft:sifter",
+        "count": 1
+    }
+}

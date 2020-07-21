@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "majcraft:ruby"
+    }
+  },
+  "result":
+  {
+    "item": "majcraft:ruby_block",
+    "count": 1
+  }
+}

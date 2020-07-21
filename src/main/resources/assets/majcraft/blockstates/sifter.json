@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "majcraft:block/sifter" },
+    "facing=south": { "model": "majcraft:block/sifter", "y":  180},
+    "facing=west": { "model": "majcraft:block/sifter", "y":  270},
+    "facing=east": { "model": "majcraft:block/sifter", "y":  90}
+  }
+}

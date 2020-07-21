@@ -1,0 +1,10 @@
+{
+  "block.screaming.ambient": {
+    "category": "block",
+    "subtitle": "block.screaming.ambient",
+    "sounds": [ {
+      "name": "majcraft:block.screaming.ambient",
+      "stream":  true
+    }]
+  }
+}

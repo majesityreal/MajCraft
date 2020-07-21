@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "majcraft:items/ruby_sword"
+  }
+}
