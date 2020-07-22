@@ -1,5 +1,7 @@
 package com.majesity.majcraft;
 
+import com.majesity.majcraft.capabilities.IPlayerData;
+import com.majesity.majcraft.capabilities.PlayerData;
 import com.majesity.majcraft.util.RegistryHandler;
 import com.majesity.majcraft.util.SoundInit;
 import net.minecraft.block.Block;
@@ -41,9 +43,10 @@ public class MajCraft
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         RegistryHandler.init();
+        PlayerData.register();
         SoundInit.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-        // Register ourselves for server and other game events we are interested in
+        // Register for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -61,7 +64,6 @@ public class MajCraft
 
     // this creates the custom creative tab with the ruby as the icon
     public static final ItemGroup TAB = new ItemGroup("tutorialTab") {
-
         @Override
         public ItemStack createIcon() {
             return new ItemStack(RegistryHandler.RUBY.get());
