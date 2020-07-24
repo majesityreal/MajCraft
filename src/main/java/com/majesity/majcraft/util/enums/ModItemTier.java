@@ -1,6 +1,6 @@
-package com.majesity.majcraft.tools;
+package com.majesity.majcraft.util.enums;
 
-import com.majesity.majcraft.util.RegistryHandler;
+import com.majesity.majcraft.init.ModItems;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 
@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 public enum ModItemTier implements IItemTier {
     // harvestLevel, maxUses, efficiency, baseDamage, enchantability, repairMaterial
     RUBY(4, 800, 7.0F, 3.0F, 12, () -> {
-        return Ingredient.fromItems(RegistryHandler.RUBY.get());
+        return Ingredient.fromItems(ModItems.RUBY.get());
     });
 
     // to make a new tier:

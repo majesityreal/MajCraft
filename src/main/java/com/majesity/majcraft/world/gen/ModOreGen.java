@@ -1,7 +1,7 @@
 package com.majesity.majcraft.world.gen;
 
 import com.majesity.majcraft.MajCraft;
-import com.majesity.majcraft.util.RegistryHandler;
+import com.majesity.majcraft.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -34,11 +34,11 @@ public class ModOreGen {
 
             //End Generation
             } else if(biome.getCategory() == Biome.Category.THEEND) {
-                genOre(biome, 15, 3, 5, 100, END_STONE, RegistryHandler.RUBY_BLOCK.get().getDefaultState(), 6);
+                genOre(biome, 15, 3, 5, 100, END_STONE, ModBlocks.RUBY_BLOCK.get().getDefaultState(), 6);
 
                 //World Generation
             } else {
-                genOre(biome, 15, 1, 5, 50, OreFeatureConfig.FillerBlockType.NATURAL_STONE, RegistryHandler.RUBY_BLOCK.get().getDefaultState(), 6);
+                genOre(biome, 15, 1, 5, 50, OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.RUBY_BLOCK.get().getDefaultState(), 6);
             }
         }
     }

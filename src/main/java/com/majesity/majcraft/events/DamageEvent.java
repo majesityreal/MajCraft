@@ -1,7 +1,6 @@
 package com.majesity.majcraft.events;
 
 import com.majesity.majcraft.MajCraft;
-import com.majesity.majcraft.util.RegistryHandler;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -31,7 +30,7 @@ public class DamageEvent {
         LivingEntity livingEntity = event.getEntityLiving();
         DamageSource damageSource = event.getSource();
         if(livingEntity instanceof PlayerEntity) {
-
+            livingEntity.getPersistentData().putInt("strength",1);
             int totalArmor = 0;
             for(ItemStack armorItem : livingEntity.getArmorInventoryList()) {
                 if(armorItem.getItem() instanceof ArmorItem) {

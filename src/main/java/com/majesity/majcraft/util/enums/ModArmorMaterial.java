@@ -1,7 +1,7 @@
-package com.majesity.majcraft.armor;
+package com.majesity.majcraft.util.enums;
 
 import com.majesity.majcraft.MajCraft;
-import com.majesity.majcraft.util.RegistryHandler;
+import com.majesity.majcraft.init.ModItems;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.crafting.Ingredient;
@@ -16,7 +16,7 @@ public enum ModArmorMaterial implements IArmorMaterial {
 
     // ruby_layer_1 , ruby_layer_2 , etc
     RUBY(MajCraft.MOD_ID + ":ruby", 20, new int[] { 20 , 500 , 6000 , 2 }, 18,
-            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, () -> { return Ingredient.fromItems(RegistryHandler.RUBY.get()); }, getKnockbackResistance(0));
+            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, () -> { return Ingredient.fromItems(ModItems.RUBY.get()); }, getKnockbackResistance(0));
 
     // for new armor sets, copy and paste and change the values accordingly
 

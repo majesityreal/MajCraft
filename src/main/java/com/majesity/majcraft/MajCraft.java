@@ -1,14 +1,16 @@
 package com.majesity.majcraft;
 
-import com.majesity.majcraft.capabilities.IPlayerData;
-import com.majesity.majcraft.capabilities.PlayerData;
-import com.majesity.majcraft.util.RegistryHandler;
+import com.majesity.majcraft.capabilities.*;
+import com.majesity.majcraft.init.ModItems;
+import com.majesity.majcraft.init.ModBlocks;
 import com.majesity.majcraft.util.SoundInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -42,8 +44,9 @@ public class MajCraft
         // Register the doClientStuff method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
-        RegistryHandler.init();
-        PlayerData.register();
+        ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
         SoundInit.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         // Register for server and other game events we are interested in
@@ -52,6 +55,7 @@ public class MajCraft
 
     private void setup(final FMLCommonSetupEvent event)
     {
+        CapabilityManager.INSTANCE.register(IPlayerData.class, new PlayerDataStorage(), PlayerDataFactory::new);
         // some preinit code
         // LOGGER.info("HELLO FROM PREINIT");
         // LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
@@ -66,7 +70,7 @@ public class MajCraft
     public static final ItemGroup TAB = new ItemGroup("tutorialTab") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(RegistryHandler.RUBY.get());
+            return new ItemStack(ModItems.RUBY.get());
         }
     };
 
