@@ -9,10 +9,10 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public class PlayerDataFactory implements IPlayerData{
 
-    private float health;
-    private int strength;
-    private int dexterity;
-    private int intelligence;
+    private float health = 0.0F;
+    private int strength = 0;
+    private int dexterity = 0;
+    private int intelligence = 0;
 
     public PlayerDataFactory() {
     }

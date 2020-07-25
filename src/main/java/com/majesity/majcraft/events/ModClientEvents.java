@@ -26,9 +26,15 @@ public class ModClientEvents {
         if(event.getEntityLiving() instanceof PlayerEntity) {
 
             PlayerEntity player = (PlayerEntity)event.getEntityLiving();
-            IPlayerData data = player.getCapability(PlayerDataProvider.capability).orElse(null);
-            data.setHealth(1.0F);
+
+            IPlayerData data = player.getCapability(PlayerDataProvider.capability).orElseThrow(IllegalStateException::new);
             MajCraft.LOGGER.info("amount of health " + data.getHealth());
+
+            /*
+            LazyOptional<IPlayerData> data = player.getCapability(PlayerDataProvider.capability);
+            data.ifPresent((test) -> {
+                MajCraft.LOGGER.info("testing lol?" + test.getStrength());
+            }); */
 
         }
         /*
@@ -49,11 +55,8 @@ public class ModClientEvents {
         //IPlayerData data = player.getCapability(PlayerData.INSTANCE).orElse(null);
 
 
-        /*
-         LazyOptional<IPlayerData> data = player.getCapability(PlayerData.INSTANCE);
-        data.ifPresent((test) -> {
-            MajCraft.LOGGER.info("testing lol?" + test.getStrength());
-        }); */
+
+
 
 
         /* if(player.getHeldItemMainhand().getItem() == Items.STICK) {

@@ -1,14 +1,18 @@
 {
   "item.majcraft.ruby": "Ruby",
   "item.majcraft.ruby_sword": "Ruby Sword",
+  "item.majcraft.ruby_pickaxe": "Ruby Pickaxe",
   "item.majcraft.ruby_helmet": "Ruby Helmet",
   "item.majcraft.ruby_chestplate": "Ruby Chestplate",
   "item.majcraft.ruby_leggings": "Ruby Leggings",
   "item.majcraft.ruby_boots": "Ruby Boots",
   "item.majcraft.wire_mesh": "Wire Mesh",
   "item.majcraft.fireball_wand": "Fireball Wand",
+  "item.majcraft.snowball_wand": "Snowball Wand",
   "block.majcraft.ruby_block": "Block of Ruby",
   "block.majcraft.sifter": "Sifter",
   "item.majcraft.chocolate": "Chocolate Bar",
-  "itemGroup.tutorialTab": "MajCraft"
+  "itemGroup.tutorialTab": "MajCraft",
+  "entity.majcraft.hog": "Hog",
+  "entity.majcraft.bird": "Bird"
 }

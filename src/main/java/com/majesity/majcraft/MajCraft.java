@@ -1,30 +1,27 @@
 package com.majesity.majcraft;
 
 import com.majesity.majcraft.capabilities.*;
+import com.majesity.majcraft.entities.BirdEntity.BirdEntity;
+import com.majesity.majcraft.entities.HogEntity;
+import com.majesity.majcraft.init.ModEntityTypes;
 import com.majesity.majcraft.init.ModItems;
 import com.majesity.majcraft.init.ModBlocks;
 import com.majesity.majcraft.util.SoundInit;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("majcraft")
@@ -46,6 +43,7 @@ public class MajCraft
 
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModEntityTypes.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         SoundInit.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
@@ -56,6 +54,16 @@ public class MajCraft
     private void setup(final FMLCommonSetupEvent event)
     {
         CapabilityManager.INSTANCE.register(IPlayerData.class, new PlayerDataStorage(), PlayerDataFactory::new);
+
+        // This registers the hog itself
+        DeferredWorkQueue.runLater(() -> {
+            // func_233813_a_() --> .create()
+            GlobalEntityTypeAttributes.put(ModEntityTypes.HOG.get(), HogEntity.setCustomAttributes().func_233813_a_());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.BIRD.get(), BirdEntity.setCustomAttributes().func_233813_a_());
+        });
+        // THIS REGISTERS THE ENTITY AND ITS SPAWNING BIOMES
+        registerEntityWorldSpawn(ModEntityTypes.HOG.get(), 1, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.SHATTERED_SAVANNA, Biomes.SHATTERED_SAVANNA_PLATEAU);
+
         // some preinit code
         // LOGGER.info("HELLO FROM PREINIT");
         // LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
@@ -73,6 +81,14 @@ public class MajCraft
             return new ItemStack(ModItems.RUBY.get());
         }
     };
+
+    public static void registerEntityWorldSpawn(EntityType<?> entity, int weight, Biome... biomes) {
+        for (Biome biome : biomes) {
+            if (biome != null) {
+                biome.getSpawns(entity.getClassification()).add(new Biome.SpawnListEntry(entity, weight, 1, 100));
+            }
+        }
+    }
 
     /*
 

@@ -4,6 +4,7 @@ import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.items.Chocolate;
 import com.majesity.majcraft.items.ItemBase;
 import com.majesity.majcraft.items.WandFireball;
+import com.majesity.majcraft.items.WandSnowball;
 import com.majesity.majcraft.util.enums.ModArmorMaterial;
 import com.majesity.majcraft.util.enums.ModItemTier;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -26,6 +27,7 @@ public class ModItems {
     public static final RegistryObject<Chocolate> CHOCOLATE = ITEMS.register(("chocolate"), Chocolate::new);
     public static final RegistryObject<Item> WIRE_MESH = ITEMS.register("wire_mesh", ItemBase::new);
     public static final RegistryObject<WandFireball> FIREBALL_WAND = ITEMS.register("fireball_wand", WandFireball::new);
+    public static final RegistryObject<WandSnowball> SNOWBALL_WAND = ITEMS.register("snowball_wand", WandSnowball::new);
 
     // Block Items
     public static final RegistryObject<Item> RUBY_BLOCK_ITEM = ITEMS.register("ruby_block", () ->
