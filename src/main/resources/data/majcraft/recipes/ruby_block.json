@@ -3,15 +3,19 @@
   "pattern":
   [
     "xxx",
-    "xxx",
+    "xdx",
     "xxx"
   ],
   "key":
   {
     "x":
     {
-      "item": "majcraft:ruby"
-    }
+      "tag": "majcraft:gems"
+    },
+    "d":
+        {
+          "item": "minecraft:diamond"
+        }
   },
   "result":
   {

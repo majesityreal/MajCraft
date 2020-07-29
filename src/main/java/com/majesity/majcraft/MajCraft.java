@@ -7,6 +7,10 @@ import com.majesity.majcraft.init.ModEntityTypes;
 import com.majesity.majcraft.init.ModItems;
 import com.majesity.majcraft.init.ModBlocks;
 import com.majesity.majcraft.util.SoundInit;
+import net.java.games.input.Component;
+import net.java.games.input.Controller;
+import net.java.games.input.Keyboard;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.ItemGroup;
@@ -16,12 +20,14 @@ import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.glfw.GLFW;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("majcraft")
@@ -30,6 +36,8 @@ public class MajCraft
     // Directly reference a log4j logger.
     public  static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "majcraft";
+    // key bindings :)
+     public static KeyBinding[] keyBindings;
 
     public MajCraft() {
         // Register the setup method for modloading
@@ -40,6 +48,7 @@ public class MajCraft
         // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
         // Register the doClientStuff method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+
 
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -58,18 +67,27 @@ public class MajCraft
         // This registers the hog itself
         DeferredWorkQueue.runLater(() -> {
             // func_233813_a_() --> .create()
-            GlobalEntityTypeAttributes.put(ModEntityTypes.HOG.get(), HogEntity.setCustomAttributes().func_233813_a_());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.BIRD.get(), BirdEntity.setCustomAttributes().func_233813_a_());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.HOG.get(), HogEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.BIRD.get(), BirdEntity.setCustomAttributes().create());
         });
         // THIS REGISTERS THE ENTITY AND ITS SPAWNING BIOMES
-        registerEntityWorldSpawn(ModEntityTypes.HOG.get(), 1, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.SHATTERED_SAVANNA, Biomes.SHATTERED_SAVANNA_PLATEAU);
-
+        // weight list (animals): 20=33%, 10=20%, 2=4.7%, 0.2=0.5% (golden bunny or something)
+        registerEntityWorldSpawn(ModEntityTypes.HOG.get(), 12, 3, 10, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.SHATTERED_SAVANNA, Biomes.SHATTERED_SAVANNA_PLATEAU);
+        registerEntityWorldSpawn(ModEntityTypes.BIRD.get(), 12, 3, 10, Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.FLOWER_FOREST);
         // some preinit code
         // LOGGER.info("HELLO FROM PREINIT");
         // LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
+        keyBindings = new KeyBinding[2];
+        keyBindings[0] = new KeyBinding("key.abilities.doublejump", GLFW.GLFW_KEY_SPACE, "key.majcraft.armorAbilities");
+        keyBindings[1] = new KeyBinding("key.abilities.crouch", GLFW.GLFW_KEY_LEFT_SHIFT, "key.majcraft.armorAbilities");
+        // GLFW.GLFW_KEY_LEFT_SHIFT
+        for (int i = 0; i < keyBindings.length; ++i)
+        {
+            ClientRegistry.registerKeyBinding(keyBindings[i]);
+        }
         // do something that can only be done on the client
         // LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
@@ -82,12 +100,16 @@ public class MajCraft
         }
     };
 
-    public static void registerEntityWorldSpawn(EntityType<?> entity, int weight, Biome... biomes) {
+    public static void registerEntityWorldSpawn(EntityType<?> entity, int weight, int minGroup, int maxGroup, Biome... biomes) {
         for (Biome biome : biomes) {
             if (biome != null) {
-                biome.getSpawns(entity.getClassification()).add(new Biome.SpawnListEntry(entity, weight, 1, 100));
+                biome.getSpawns(entity.getClassification()).add(new Biome.SpawnListEntry(entity, weight, minGroup, maxGroup));
             }
         }
+    }
+
+    public static KeyBinding[] getKeyBindings() {
+        return keyBindings;
     }
 
     /*

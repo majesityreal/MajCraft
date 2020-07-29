@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "#L#",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "tag": "minecraft:leaves"
+        },
+        "L": {
+            "tag": "minecraft:logs_that_burn"
+        }
+    },
+    "result": {
+        "item": "majcraft:forest_tangle",
+        "count": 1
+    }
+}

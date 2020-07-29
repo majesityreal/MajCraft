@@ -39,12 +39,12 @@ public class BirdModel<T extends BirdEntity> extends EntityModel<T> {
         left_leg.setTextureOffset(37, 0).addBox(-2.0F, -1.0F, -3.0F, 3.0F, 3.0F, 2.0F, 0.0F, false);
 
         right_wing = new ModelRenderer(this);
-        right_wing.setRotationPoint(4.0F, 13.0F, 0.0F);
-        right_wing.setTextureOffset(24, 13).addBox(-7.0F, 1.0F, -3.0F, 1.0F, 3.0F, 5.0F, 0.0F, false);
+        right_wing.setRotationPoint(-2.0F, 14.0F, -1.0F);
+        right_wing.setTextureOffset(24, 13).addBox(-1.0F, 0.0F, -2.0F, 1.0F, 3.0F, 5.0F, 0.0F, false);
 
         left_wing = new ModelRenderer(this);
-        left_wing.setRotationPoint(-4.0F, 13.0F, 0.0F);
-        left_wing.setTextureOffset(38, 13).addBox(6.0F, 1.0F, -3.0F, 1.0F, 3.0F, 5.0F, 0.0F, false);
+        left_wing.setRotationPoint(2.0F, 14.0F, -1.0F);
+        left_wing.setTextureOffset(38, 13).addBox(0.0F, 0.0F, -2.0F, 1.0F, 3.0F, 5.0F, 0.0F, false);
 
         chin = new ModelRenderer(this);
         chin.setRotationPoint(0.0F, 15.0F, -4.0F);
@@ -55,7 +55,7 @@ public class BirdModel<T extends BirdEntity> extends EntityModel<T> {
         setRotationAngle(tail, 0.0F, -1.5708F, 0.0F);
         tail.setTextureOffset(35, 7).addBox(-2.0F, -1.0F, -1.5F, 1.0F, 3.0F, 2.0F, 0.0F, false);
     }
-
+    
     @Override
     public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F);

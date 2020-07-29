@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "Y Y",
+        "# #"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:feather"
+        },
+        "Y": {
+            "item": "majcraft:beak"
+        }
+    },
+    "result": {
+        "item": "majcraft:avian_leggings",
+        "count": 1}
+}

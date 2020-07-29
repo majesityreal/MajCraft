@@ -5,6 +5,9 @@ import com.majesity.majcraft.items.Chocolate;
 import com.majesity.majcraft.items.ItemBase;
 import com.majesity.majcraft.items.WandFireball;
 import com.majesity.majcraft.items.WandSnowball;
+import com.majesity.majcraft.items.armor.AvianArmor;
+import com.majesity.majcraft.items.armor.ForestArmor;
+import com.majesity.majcraft.items.armor.MelonArmor;
 import com.majesity.majcraft.util.enums.ModArmorMaterial;
 import com.majesity.majcraft.util.enums.ModItemTier;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -28,6 +31,8 @@ public class ModItems {
     public static final RegistryObject<Item> WIRE_MESH = ITEMS.register("wire_mesh", ItemBase::new);
     public static final RegistryObject<WandFireball> FIREBALL_WAND = ITEMS.register("fireball_wand", WandFireball::new);
     public static final RegistryObject<WandSnowball> SNOWBALL_WAND = ITEMS.register("snowball_wand", WandSnowball::new);
+    public static final RegistryObject<Item> BEAK = ITEMS.register("beak", ItemBase::new);
+    public static final RegistryObject<Item> FOREST_TANGLE = ITEMS.register("forest_tangle", ItemBase::new);
 
     // Block Items
     public static final RegistryObject<Item> RUBY_BLOCK_ITEM = ITEMS.register("ruby_block", () ->
@@ -58,16 +63,38 @@ public class ModItems {
     // Armor
     public static final RegistryObject<ArmorItem> RUBY_HELMET = ITEMS.register("ruby_helmet", () ->
             new ArmorItem(ModArmorMaterial.RUBY, EquipmentSlotType.HEAD, new Item.Properties().group(MajCraft.TAB)));
-
     public static final RegistryObject<ArmorItem> RUBY_CHESTPLATE = ITEMS.register("ruby_chestplate", () ->
             new ArmorItem(ModArmorMaterial.RUBY, EquipmentSlotType.CHEST, new Item.Properties().group(MajCraft.TAB)));
-
     public static final RegistryObject<ArmorItem> RUBY_LEGGINGS = ITEMS.register("ruby_leggings", () ->
             new ArmorItem(ModArmorMaterial.RUBY, EquipmentSlotType.LEGS, new Item.Properties().group(MajCraft.TAB)));
-
     public static final RegistryObject<ArmorItem> RUBY_BOOTS = ITEMS.register("ruby_boots", () ->
             new ArmorItem(ModArmorMaterial.RUBY, EquipmentSlotType.FEET, new Item.Properties().group(MajCraft.TAB)));
 
+    public static final RegistryObject<AvianArmor> AVIAN_HELMET = ITEMS.register("avian_helmet", () ->
+            new AvianArmor(ModArmorMaterial.AVIAN, EquipmentSlotType.HEAD, new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<AvianArmor> AVIAN_CHESTPLATE = ITEMS.register("avian_chestplate", () ->
+            new AvianArmor(ModArmorMaterial.AVIAN, EquipmentSlotType.CHEST, new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<AvianArmor> AVIAN_LEGGINGS = ITEMS.register("avian_leggings", () ->
+            new AvianArmor(ModArmorMaterial.AVIAN, EquipmentSlotType.LEGS, new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<AvianArmor> AVIAN_BOOTS = ITEMS.register("avian_boots", () ->
+            new AvianArmor(ModArmorMaterial.AVIAN, EquipmentSlotType.FEET, new Item.Properties().group(MajCraft.TAB)));
 
+    public static final RegistryObject<ForestArmor> FOREST_HELMET = ITEMS.register("forest_helmet", () ->
+            new ForestArmor(ModArmorMaterial.FOREST, EquipmentSlotType.HEAD, new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<ForestArmor> FOREST_CHESTPLATE = ITEMS.register("forest_chestplate", () ->
+            new ForestArmor(ModArmorMaterial.FOREST, EquipmentSlotType.CHEST, new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<ForestArmor> FOREST_LEGGINGS = ITEMS.register("forest_leggings", () ->
+            new ForestArmor(ModArmorMaterial.FOREST, EquipmentSlotType.LEGS, new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<ForestArmor> FOREST_BOOTS = ITEMS.register("forest_boots", () ->
+            new ForestArmor(ModArmorMaterial.FOREST, EquipmentSlotType.FEET, new Item.Properties().group(MajCraft.TAB)));
+
+    public static final RegistryObject<MelonArmor> MELON_HELMET = ITEMS.register("melon_helmet", () ->
+            new MelonArmor(ModArmorMaterial.MELON, EquipmentSlotType.HEAD, new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<MelonArmor> MELON_CHESTPLATE = ITEMS.register("melon_chestplate", () ->
+            new MelonArmor(ModArmorMaterial.MELON, EquipmentSlotType.CHEST, new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<MelonArmor> MELON_LEGGINGS = ITEMS.register("melon_leggings", () ->
+            new MelonArmor(ModArmorMaterial.MELON, EquipmentSlotType.LEGS, new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<MelonArmor> MELON_BOOTS = ITEMS.register("melon_boots", () ->
+            new MelonArmor(ModArmorMaterial.MELON, EquipmentSlotType.FEET, new Item.Properties().group(MajCraft.TAB)));
 
 }

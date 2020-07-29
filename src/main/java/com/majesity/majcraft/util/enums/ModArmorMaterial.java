@@ -4,6 +4,7 @@ import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.init.ModItems;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -16,7 +17,18 @@ public enum ModArmorMaterial implements IArmorMaterial {
 
     // ruby_layer_1 , ruby_layer_2 , etc
     RUBY(MajCraft.MOD_ID + ":ruby", 20, new int[] { 20 , 500 , 6000 , 2 }, 18,
-            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, () -> { return Ingredient.fromItems(ModItems.RUBY.get()); }, getKnockbackResistance(0));
+            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, () -> { return Ingredient.fromItems(ModItems.RUBY.get()); }, getKnockbackResistance(0)),
+
+    AVIAN(MajCraft.MOD_ID + ":avian", 15, new int[] { 2 , 4 , 3 , 1 }, 20,
+            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, () -> { return Ingredient.fromItems(ModItems.BEAK.get()); }, getKnockbackResistance(0)),
+// was 7
+    FOREST(MajCraft.MOD_ID + ":forest", 1, new int[] { 1 , 2 , 2 , 1 }, 25,
+            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, () -> { return Ingredient.fromItems(ModItems.FOREST_TANGLE.get()); }, getKnockbackResistance(0.1F)),
+
+    MELON(MajCraft.MOD_ID + ":melon", 1, new int[] { 1 , 1 , 1 , 1 }, 1,
+            SoundEvents.ENTITY_SLIME_SQUISH, 0.0F, () -> { return Ingredient.fromItems(Items.MELON); }, getKnockbackResistance(0));
+
+// enchantability: leather 15, chainmail 12, gold 25, iron 9, diamond 10
 
     // for new armor sets, copy and paste and change the values accordingly
 
@@ -40,7 +52,6 @@ public enum ModArmorMaterial implements IArmorMaterial {
         this.repairMaterial = repairMaterial;
         this.knockbackResistance = knockbackResistance;
     }
-
 
     @Override
     public int getDurability(EquipmentSlotType slotIn) {
@@ -79,11 +90,11 @@ public enum ModArmorMaterial implements IArmorMaterial {
     }
 
     @Override
-    public float func_230304_f_() {
+    public float getKnockbackResistance() {
         return knockbackResistance;
     }
 
-    public static int getKnockbackResistance(int amount) {
+    public static float getKnockbackResistance(float amount) {
         return amount;
     }
 }

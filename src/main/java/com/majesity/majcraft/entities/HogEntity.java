@@ -37,8 +37,8 @@ public class HogEntity extends AnimalEntity {
     // .func_233815_a_ --> createMutableAttribute(Attribute.something, float f);
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.func_233666_p_()
-                .func_233815_a_(Attributes.MAX_HEALTH, 12.0D)
-                .func_233815_a_(Attributes.MOVEMENT_SPEED, 0.25D);
+                .createMutableAttribute(Attributes.MAX_HEALTH, 12.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D);
     }
 
     // this is part of the AI of the entity

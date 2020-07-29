@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "# #",
+        "   "
+    ],
+    "key": {
+        "#": {
+            "item": "majcraft:forest_tangle"
+        }
+    },
+    "result": {
+        "item": "majcraft:forest_helmet",
+        "count": 1
+    }
+}

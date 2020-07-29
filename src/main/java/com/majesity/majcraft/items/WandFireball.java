@@ -24,7 +24,6 @@ public class WandFireball extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-
         WandFireballEntity test = new WandFireballEntity(worldIn,playerIn.getPosX()+playerIn.getForward().getX(),playerIn.getPosY()+1.25,playerIn.getPosZ()+playerIn.getForward().getZ(),playerIn.getForward().getX(),playerIn.getForward().getY(),playerIn.getForward().getZ());
         worldIn.addEntity(test);
         ItemStack heldItem = playerIn.getHeldItem(handIn);

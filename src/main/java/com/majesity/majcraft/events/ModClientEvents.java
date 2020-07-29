@@ -35,7 +35,6 @@ public class ModClientEvents {
             data.ifPresent((test) -> {
                 MajCraft.LOGGER.info("testing lol?" + test.getStrength());
             }); */
-
         }
         /*
         if(player.getPersistentData().contains("strength")) {

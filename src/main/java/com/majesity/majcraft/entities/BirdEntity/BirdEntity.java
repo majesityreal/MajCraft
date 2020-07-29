@@ -89,9 +89,9 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.func_233666_p_()
-                .func_233815_a_(Attributes.MAX_HEALTH, 5.0D)
-                .func_233815_a_(Attributes.FLYING_SPEED, 0.6F)
-                .func_233815_a_(Attributes.MOVEMENT_SPEED, 0.2F);
+                .createMutableAttribute(Attributes.MAX_HEALTH, 5.0D)
+                .createMutableAttribute(Attributes.FLYING_SPEED, 0.6F)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2F);
     }
 
 
@@ -125,7 +125,7 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
 
     protected void updateAITasks() {
         super.updateAITasks();
-        BlockPos blockpos = this.func_233580_cy_();
+        BlockPos blockpos = this.getPosition();
         BlockPos blockpos1 = blockpos.down();
         if (!this.getIsBirdFlying()) {
                 // if the block under it is burning, lava, or water, set it to flying

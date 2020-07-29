@@ -14,7 +14,7 @@ public class Chocolate extends Item {
                 .food(new Food.Builder()
                     .hunger(1)
                     .saturation(0.8F)
-                    .effect(new EffectInstance(Effects.SPEED,300, 0),1)
+                    .effect(new EffectInstance(Effects.SPEED,300, 0, false,false),1)
                     .setAlwaysEdible()
                     .build())
         );

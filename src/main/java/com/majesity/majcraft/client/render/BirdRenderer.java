@@ -24,13 +24,13 @@ public class BirdRenderer extends MobRenderer<BirdEntity, BirdModel<BirdEntity>>
         return TEXTURE;
     }
 
-    /*
+
     @Override
     protected float handleRotationFloat(BirdEntity livingBase, float partialTicks) {
         float f = MathHelper.lerp(partialTicks, livingBase.oFlap, livingBase.wingRotation);
         float f1 = MathHelper.lerp(partialTicks, livingBase.oFlapSpeed, livingBase.destPos);
         return (MathHelper.sin(f) + 1F) * f1;
-    } */
+    }
 
 
 }
