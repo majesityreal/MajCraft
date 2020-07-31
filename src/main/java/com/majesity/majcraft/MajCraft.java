@@ -73,7 +73,7 @@ public class MajCraft
         // THIS REGISTERS THE ENTITY AND ITS SPAWNING BIOMES
         // weight list (animals): 20=33%, 10=20%, 2=4.7%, 0.2=0.5% (golden bunny or something)
         registerEntityWorldSpawn(ModEntityTypes.HOG.get(), 12, 3, 10, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.SHATTERED_SAVANNA, Biomes.SHATTERED_SAVANNA_PLATEAU);
-        registerEntityWorldSpawn(ModEntityTypes.BIRD.get(), 12, 3, 10, Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.FLOWER_FOREST);
+        registerEntityWorldSpawn(ModEntityTypes.BIRD.get(), 120, 3, 100, Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.FLOWER_FOREST);
         // some preinit code
         // LOGGER.info("HELLO FROM PREINIT");
         // LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());

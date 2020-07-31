@@ -1,5 +1,8 @@
 package com.majesity.majcraft.entities.BirdEntity;
 
+import com.majesity.majcraft.MajCraft;
+import com.majesity.majcraft.blocks.BirdNest;
+import com.majesity.majcraft.init.ModBlocks;
 import com.majesity.majcraft.init.ModEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -10,9 +13,11 @@ import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
+import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -25,13 +30,16 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
 
-    // ADD THE BIRD SPECIFIC VARIABLES HERE
+    //BIRD SPECIFIC VARS
     public static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.WHEAT_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS);
     private double startingY;
     private double flightChanger;
@@ -39,32 +47,28 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
     public int timeUntilFly;
     public int xDir =0;
     public int zDir =0;
-
-    // the bat vars are here
+    // the flying vars are here
     private static final DataParameter<Byte> FLYING = EntityDataManager.createKey(BirdEntity.class, DataSerializers.BYTE);
     private BlockPos targetPosition;
-    // this is used for the closest player thing
+    // this is used for closest player detection
     private static final EntityPredicate field_213813_c = (new EntityPredicate()).setDistance(4.0D).allowFriendlyFire();
-
     // the flapping animation vars
     public float wingRotation;
     public float destPos;
     public float oFlapSpeed;
     public float oFlap;
     public float wingRotDelta = 1.0F;
+    // variant is here
+    private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(BirdEntity.class, DataSerializers.VARINT);
+    // remembering nest location
+    private static final DataParameter<BlockPos> HOME_POS = EntityDataManager.createKey(BirdEntity.class, DataSerializers.BLOCK_POS);
 
 
     public BirdEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type,worldIn);
         // allows it to fly
         this.moveController = new FlyingMovementController(this, 10, false);
-        if(xDir==0) {
-            if(this.rand.nextBoolean()) {
-                xDir = -1;
-            } else {
-                xDir = 1;
-            }
-        }
+        if(xDir==0)
         if(zDir==0) {
             if(this.rand.nextBoolean()) {
                 zDir = -1;
@@ -82,9 +86,12 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
         // INSTANTIATE THE BIRD SPECIFIC VARIABLES HERE
     }
 
+    @Override
     protected void registerData() {
         super.registerData();
         this.dataManager.register(FLYING, (byte)0);
+        this.dataManager.register(VARIANT, 0);
+        this.dataManager.register(HOME_POS, BlockPos.ZERO);
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -95,6 +102,7 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
     }
 
 
+    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new PanicGoal(this,1.25D));
@@ -109,6 +117,7 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
 
     // overrides the MobEntity navigator, makes it try to fly.
     // flap speed will change how much it flies
+    @Override
     protected PathNavigator createNavigator(World worldIn) {
         FlyingPathNavigator flyingpathnavigator = new FlyingPathNavigator(this, worldIn);
         flyingpathnavigator.setCanOpenDoors(false);
@@ -119,10 +128,12 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
     }
 
     // turns off fall damage?
+    @Override
     public boolean onLivingFall(float distance, float damageMultiplier) {
         return false;
     }
 
+    @Override
     protected void updateAITasks() {
         super.updateAITasks();
         BlockPos blockpos = this.getPosition();
@@ -154,7 +165,6 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
             if (this.targetPosition != null && (!this.world.isAirBlock(this.targetPosition) || this.targetPosition.getY() < 1)) {
                 this.targetPosition = null;
             }
-                // if target checked by up there, or on a random time, or if it gets within 2 blocks of its target, it switches targets
             // change this to change the flight pattern
              if(this.rand.nextInt(50) == 0) {
                 boolean rando = this.rand.nextBoolean();
@@ -172,6 +182,7 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
                     }
                 }
             }
+            // if target checked by up there, or on a random time, or if it gets within 2 blocks of its target, it switches targets
             if (this.targetPosition == null || this.targetPosition.withinDistance(this.getPositionVec(), 2.0D)) {
                 this.targetPosition = new BlockPos(this.getPosX() + (xDir * Math.max(this.rand.nextInt(10),5)), this.getPosY() + (double)this.rand.nextInt(7) - flightChanger, this.getPosZ() + (zDir * Math.max(this.rand.nextInt(10),5)));
                // this.targetPosition = new BlockPos(this.getPosX() + (double)this.rand.nextInt(10) - (double)this.rand.nextInt(10), this.getPosY() + (double)this.rand.nextInt(7) - flightChanger, this.getPosZ() + (double)this.rand.nextInt(10) - (double)this.rand.nextInt(10));
@@ -234,6 +245,7 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
 
     }
 
+    @Override
     public void livingTick() {
         super.livingTick();
         if(this.timeUntilFly <= 0) {
@@ -255,18 +267,60 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
         }
         this.wingRotDelta = (float)((double)this.wingRotDelta * 0.9D);
         this.wingRotation += this.wingRotDelta * 2.0F;
-
     }
 
-    /*
+    public int getVariant() {
+        return MathHelper.clamp(this.dataManager.get(VARIANT), 0, 3);
+    }
+
+    public void setVariant(int variantIn) {
+        this.dataManager.set(VARIANT, variantIn);
+    }
+
+    public void setHome(BlockPos position) {
+        this.dataManager.set(HOME_POS, position);
+    }
+
+    private BlockPos getHome() {
+        return this.dataManager.get(HOME_POS);
+    }
+
+    public void writeAdditional(CompoundNBT compound) {
+        super.writeAdditional(compound);
+        compound.putInt("Variant", this.getVariant());
+        compound.putByte("isFlying", this.dataManager.get(FLYING));
+        compound.putInt("HomePosX", this.getHome().getX());
+        compound.putInt("HomePosY", this.getHome().getY());
+        compound.putInt("HomePosZ", this.getHome().getZ());
+    }
+
+    public void readAdditional(CompoundNBT compound) {
+        super.readAdditional(compound);
+        this.setVariant(compound.getInt("Variant"));
+        this.dataManager.set(FLYING, compound.getByte("isFlying"));
+        int i = compound.getInt("HomePosX");
+        int j = compound.getInt("HomePosY");
+        int k = compound.getInt("HomePosZ");
+        this.setHome(new BlockPos(i, j, k));
+    }
+
+    @Override
+    public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+        this.setVariant(this.rand.nextInt(4));
+        this.setHome(this.getPosition());
+        // sets where they spawn to a bird nest blockc
+        return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+    }
+
+
     @Override
     public boolean canSpawn(IWorld worldIn, SpawnReason spawnReasonIn) {
         return super.canSpawn(worldIn, spawnReasonIn);
     }
 
     public static boolean canAnimalSpawn(EntityType<? extends AnimalEntity> animal, IWorld worldIn, SpawnReason reason, BlockPos pos, Random random) {
-        return (worldIn.getBlockState(pos.down()).isIn(Blocks.OAK_LEAVES) || worldIn.getBlockState(pos.down()).isIn(Blocks.OAK_LEAVES)) && worldIn.getLightSubtracted(pos, 0) > 8;
-    } */
+        return (worldIn.getBlockState(pos.down()).isIn(Blocks.OAK_LEAVES) || worldIn.getBlockState(pos.down()).isIn(Blocks.BIRCH_LEAVES));
+    }
 
     @Nullable
     @Override
@@ -286,4 +340,12 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
     @Override
     protected void playStepSound(BlockPos pos, BlockState blockIn) { this.playSound(SoundEvents.ENTITY_PARROT_STEP,0.15F,1.0F); }
 
+
+    /* USE THIS TO CHECK IF THE BIRD CAN GO TO PLACE INSTEAD OF GETTING STUCK IN BLOCK
+       public boolean canEntityBeSeen(Entity entityIn) {
+      Vector3d vector3d = new Vector3d(this.getPosX(), this.getPosYEye(), this.getPosZ());
+      Vector3d vector3d1 = new Vector3d(entityIn.getPosX(), entityIn.getPosYEye(), entityIn.getPosZ());
+      return this.world.rayTraceBlocks(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS;
+   }
+     */
 }

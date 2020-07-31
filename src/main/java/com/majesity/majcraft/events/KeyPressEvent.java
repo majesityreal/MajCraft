@@ -3,6 +3,10 @@ package com.majesity.majcraft.events;
 import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.init.ModItems;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.IngameGui;
+import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.gui.screen.MainMenuScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effect;
@@ -29,17 +33,18 @@ public class KeyPressEvent {
         int key = event.getKey();
         event.getAction();
         KeyBinding keyBinding = keyBindings[1];
+        if(Minecraft.getInstance() != null && !(Minecraft.getInstance().currentScreen instanceof Screen)) {
         PlayerEntity player = Minecraft.getInstance().player;
-        if (event.getKey() == GLFW.GLFW_KEY_SPACE && event.getAction() == 1) {
-            if(player.inventory.armorItemInSlot(0)!=null && player.inventory.armorItemInSlot(1)!=null && player.inventory.armorItemInSlot(2)!=null && player.inventory.armorItemInSlot(3)!=null) {
-                if(player.inventory.armorItemInSlot(0).getItem().equals(ModItems.AVIAN_BOOTS.get().asItem()) && player.inventory.armorItemInSlot(1).getItem().equals(ModItems.AVIAN_LEGGINGS.get().asItem()) && player.inventory.armorItemInSlot(2).getItem().equals(ModItems.AVIAN_CHESTPLATE.get().asItem()) && player.inventory.armorItemInSlot(3).getItem().equals(ModItems.AVIAN_HELMET.get().asItem())) {
-                    if(!player.isOnGround()&& alreadyJumped==false) {
-                        player.setVelocity(0,0.7,0);
-                        alreadyJumped=true;
+            if (event.getKey() == GLFW.GLFW_KEY_SPACE && event.getAction() == 1) {
+                if (player.inventory.armorItemInSlot(0) != null && player.inventory.armorItemInSlot(1) != null && player.inventory.armorItemInSlot(2) != null && player.inventory.armorItemInSlot(3) != null) {
+                    if (player.inventory.armorItemInSlot(0).getItem().equals(ModItems.AVIAN_BOOTS.get().asItem()) && player.inventory.armorItemInSlot(1).getItem().equals(ModItems.AVIAN_LEGGINGS.get().asItem()) && player.inventory.armorItemInSlot(2).getItem().equals(ModItems.AVIAN_CHESTPLATE.get().asItem()) && player.inventory.armorItemInSlot(3).getItem().equals(ModItems.AVIAN_HELMET.get().asItem())) {
+                        if (!player.isOnGround() && alreadyJumped == false) {
+                            player.setVelocity(0, 0.7, 0);
+                            alreadyJumped = true;
+                        }
                     }
                 }
             }
-        }
        /* else if(event.getKey() == GLFW.GLFW_KEY_LEFT_SHIFT && event.getAction() == 1) {
             if(player.inventory.armorItemInSlot(0)!=null && player.inventory.armorItemInSlot(1)!=null && player.inventory.armorItemInSlot(2)!=null && player.inventory.armorItemInSlot(3)!=null) {
                 if(player.inventory.armorItemInSlot(0).getItem().equals(ModItems.FOREST_BOOTS.get().asItem()) && player.inventory.armorItemInSlot(1).getItem().equals(ModItems.FOREST_LEGGINGS.get().asItem()) && player.inventory.armorItemInSlot(2).getItem().equals(ModItems.FOREST_CHESTPLATE.get().asItem()) && player.inventory.armorItemInSlot(3).getItem().equals(ModItems.FOREST_HELMET.get().asItem())) {
@@ -56,6 +61,7 @@ public class KeyPressEvent {
                 }
             }
         }*/
+        }
     }
 
     // this is for the avian set, negates fall damage and allows double jump again

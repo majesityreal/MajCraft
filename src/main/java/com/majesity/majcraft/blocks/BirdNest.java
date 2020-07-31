@@ -13,45 +13,60 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
-public class Sifter extends Block {
+public class BirdNest extends Block {
 
     private static final VoxelShape SHAPE_N = Stream.of(
-            Block.makeCuboidShape(13, 0, 1, 15, 10, 3), Block.makeCuboidShape(1, 0, 1, 3, 10, 3),
-            Block.makeCuboidShape(1, 0, 13, 3, 10, 15), Block.makeCuboidShape(13, 0, 13, 15, 10, 15),
-            Block.makeCuboidShape(1, 10, 1, 15, 11, 15), Block.makeCuboidShape(15, 11, 0, 16, 13, 16),
-            Block.makeCuboidShape(1, 11, 15, 15, 13, 16), Block.makeCuboidShape(1, 11, 0, 15, 13, 1),
-            Block.makeCuboidShape(0, 11, 0, 1, 13, 16)
+            Block.makeCuboidShape(4, 0, 2, 12, 4, 3),
+            Block.makeCuboidShape(13, 0, 4, 14, 4, 12),
+            Block.makeCuboidShape(2, 0, 4, 3, 4, 12),
+            Block.makeCuboidShape(3, 0, 3, 13, 1, 13),
+            Block.makeCuboidShape(4, 0, 13, 12, 4, 14),
+            Block.makeCuboidShape(3, 1, 3, 4, 4, 4),
+            Block.makeCuboidShape(12, 1, 3, 13, 4, 4),
+            Block.makeCuboidShape(12, 1, 12, 13, 4, 13),
+            Block.makeCuboidShape(3, 1, 12, 4, 4, 13)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
     private static final VoxelShape SHAPE_E = Stream.of(
-            Block.makeCuboidShape(1, -0.7222222222222197, 13, 3, 9.27777777777778, 15), Block.makeCuboidShape(13, -0.7222222222222197, 13, 15, 9.27777777777778, 15),
-            Block.makeCuboidShape(13, -0.7222222222222197, 1, 15, 9.27777777777778, 3), Block.makeCuboidShape(1, -0.7222222222222197, 1, 3, 9.27777777777778, 3),
-            Block.makeCuboidShape(1, 9.27777777777778, 1, 15, 10.27777777777778, 15), Block.makeCuboidShape(0, 10.27777777777778, 0, 1, 12.27777777777778, 16),
-            Block.makeCuboidShape(1, 10.27777777777778, 0, 15, 12.27777777777778, 1), Block.makeCuboidShape(1, 10.27777777777778, 15, 15, 12.27777777777778, 16),
-            Block.makeCuboidShape(15, 10.27777777777778, 0, 16, 12.27777777777778, 16)
+            Block.makeCuboidShape(4, 0, 2, 12, 4, 3),
+            Block.makeCuboidShape(13, 0, 4, 14, 4, 12),
+            Block.makeCuboidShape(2, 0, 4, 3, 4, 12),
+            Block.makeCuboidShape(3, 0, 3, 13, 1, 13),
+            Block.makeCuboidShape(4, 0, 13, 12, 4, 14),
+            Block.makeCuboidShape(3, 1, 3, 4, 4, 4),
+            Block.makeCuboidShape(12, 1, 3, 13, 4, 4),
+            Block.makeCuboidShape(12, 1, 12, 13, 4, 13),
+            Block.makeCuboidShape(3, 1, 12, 4, 4, 13)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
     private static final VoxelShape SHAPE_S = Stream.of(
-            Block.makeCuboidShape(13, -0.7222222222222197, 13, 15, 9.27777777777778, 15), Block.makeCuboidShape(1, -0.7222222222222197, 13, 3, 9.27777777777778, 15),
-            Block.makeCuboidShape(1, -0.7222222222222197, 1, 3, 9.27777777777778, 3), Block.makeCuboidShape(13, -0.7222222222222197, 1, 15, 9.27777777777778, 3),
-            Block.makeCuboidShape(1, 9.27777777777778, 1, 15, 10.27777777777778, 15), Block.makeCuboidShape(15, 10.27777777777778, 0, 16, 12.27777777777778, 16),
-            Block.makeCuboidShape(1, 10.27777777777778, 0, 15, 12.27777777777778, 1), Block.makeCuboidShape(1, 10.27777777777778, 15, 15, 12.27777777777778, 16),
-            Block.makeCuboidShape(0, 10.27777777777778, 0, 1, 12.27777777777778, 16)
+            Block.makeCuboidShape(4, 0, 2, 12, 4, 3),
+            Block.makeCuboidShape(13, 0, 4, 14, 4, 12),
+            Block.makeCuboidShape(2, 0, 4, 3, 4, 12),
+            Block.makeCuboidShape(3, 0, 3, 13, 1, 13),
+            Block.makeCuboidShape(4, 0, 13, 12, 4, 14),
+            Block.makeCuboidShape(3, 1, 3, 4, 4, 4),
+            Block.makeCuboidShape(12, 1, 3, 13, 4, 4),
+            Block.makeCuboidShape(12, 1, 12, 13, 4, 13),
+            Block.makeCuboidShape(3, 1, 12, 4, 4, 13)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
     private static final VoxelShape SHAPE_W = Stream.of(
-            Block.makeCuboidShape(13, -0.7222222222222197, 13, 15, 9.27777777777778, 15), Block.makeCuboidShape(1, -0.7222222222222197, 13, 3, 9.27777777777778, 15),
-            Block.makeCuboidShape(1, -0.7222222222222197, 1, 3, 9.27777777777778, 3), Block.makeCuboidShape(13, -0.7222222222222197, 1, 15, 9.27777777777778, 3),
-            Block.makeCuboidShape(1, 9.27777777777778, 1, 15, 10.27777777777778, 15), Block.makeCuboidShape(15, 10.27777777777778, 0, 16, 12.27777777777778, 16),
-            Block.makeCuboidShape(1, 10.27777777777778, 0, 15, 12.27777777777778, 1), Block.makeCuboidShape(1, 10.27777777777778, 15, 15, 12.27777777777778, 16),
-            Block.makeCuboidShape(0, 10.27777777777778, 0, 1, 12.27777777777778, 16)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+            Block.makeCuboidShape(4, 0, 2, 12, 4, 3),
+            Block.makeCuboidShape(13, 0, 4, 14, 4, 12),
+            Block.makeCuboidShape(2, 0, 4, 3, 4, 12),
+            Block.makeCuboidShape(3, 0, 3, 13, 1, 13),
+            Block.makeCuboidShape(4, 0, 13, 12, 4, 14),
+            Block.makeCuboidShape(3, 1, 3, 4, 4, 4),
+            Block.makeCuboidShape(12, 1, 3, 13, 4, 4),
+            Block.makeCuboidShape(12, 1, 12, 13, 4, 13),
+            Block.makeCuboidShape(3, 1, 12, 4, 4, 13)
+    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();;
 
     private static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
@@ -71,7 +86,7 @@ public class Sifter extends Block {
         }
     }
 
-    public Sifter() {
+    public BirdNest() {
         super(AbstractBlock.Properties.create(Material.WOOD)
                         .hardnessAndResistance(0.5f,0.5f)
                         .sound(SoundType.WOOD)
@@ -80,9 +95,6 @@ public class Sifter extends Block {
                 //.setLightLevel(value -> 15)
         );
     }
-
-
-
 
     @Nullable
     @Override
@@ -110,4 +122,5 @@ public class Sifter extends Block {
         // 0 will get more shadow, 1 removes shadow. float value
         return 0.8F;
     }
+
 }

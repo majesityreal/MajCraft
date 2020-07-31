@@ -6,12 +6,13 @@ import com.majesity.majcraft.entities.BirdEntity.BirdEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
 public class BirdRenderer extends MobRenderer<BirdEntity, BirdModel<BirdEntity>> {
 
-    protected static final ResourceLocation TEXTURE = new ResourceLocation(MajCraft.MOD_ID,"textures/entity/bird.png");
+    public static final ResourceLocation[] BIRD_TEXTURES = new ResourceLocation[]{new ResourceLocation(MajCraft.MOD_ID,"textures/entity/bird/blue_bird.png"), new ResourceLocation(MajCraft.MOD_ID,"textures/entity/bird/red_bird.png"), new ResourceLocation(MajCraft.MOD_ID,"textures/entity/bird/white_bird.png"), new ResourceLocation(MajCraft.MOD_ID,"textures/entity/bird/orange_bird.png")};
 
 
     public BirdRenderer(EntityRendererManager renderManagerIn) {
@@ -21,7 +22,7 @@ public class BirdRenderer extends MobRenderer<BirdEntity, BirdModel<BirdEntity>>
     // returns the texture of the bird
     @Override
     public ResourceLocation getEntityTexture(BirdEntity entity) {
-        return TEXTURE;
+        return BIRD_TEXTURES[entity.getVariant()];
     }
 
 

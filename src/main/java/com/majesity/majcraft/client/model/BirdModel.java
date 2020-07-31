@@ -24,36 +24,37 @@ public class BirdModel<T extends BirdEntity> extends EntityModel<T> {
 
         head = new ModelRenderer(this);
         head.setRotationPoint(0.0F, 15.0F, -4.0F);
-        head.setTextureOffset(0, 0).addBox(-2.0F, -3.0F, -2.0F, 4.0F, 4.0F, 3.0F, 0.0F, false);
+        head.setTextureOffset(0, 0).addBox(-2.0F, 1.0F, -2.0F, 4.0F, 4.0F, 3.0F, 0.0F, false);
 
         body = new ModelRenderer(this);
-        body.setRotationPoint(0.0F, 16.0F, 0.0F);
-        body.setTextureOffset(0, 9).addBox(-2.0F, -4.0F, -2.0F, 4.0F, 6.0F, 4.0F, 0.0F, false);
+        body.setRotationPoint(0.0F, 18.0F, -2.0F);
+        setRotationAngle(body, 1.5708F, 0.0F, 0.0F);
+        body.setTextureOffset(0, 9).addBox(-2.0F, -1.0F, -3.0F, 4.0F, 6.0F, 4.0F, 0.0F, false);
 
         right_leg = new ModelRenderer(this);
         right_leg.setRotationPoint(2.0F, 19.0F, 1.0F);
-        right_leg.setTextureOffset(26, 0).addBox(-2.0F, -1.0F, -3.0F, 3.0F, 3.0F, 2.0F, 0.0F, false);
+        right_leg.setTextureOffset(26, 0).addBox(-2.0F, 2.0F, -3.0F, 3.0F, 3.0F, 2.0F, 0.0F, false);
 
         left_leg = new ModelRenderer(this);
         left_leg.setRotationPoint(-1.0F, 19.0F, 1.0F);
-        left_leg.setTextureOffset(37, 0).addBox(-2.0F, -1.0F, -3.0F, 3.0F, 3.0F, 2.0F, 0.0F, false);
+        left_leg.setTextureOffset(37, 0).addBox(-2.0F, 2.0F, -3.0F, 3.0F, 3.0F, 2.0F, 0.0F, false);
 
         right_wing = new ModelRenderer(this);
         right_wing.setRotationPoint(-2.0F, 14.0F, -1.0F);
-        right_wing.setTextureOffset(24, 13).addBox(-1.0F, 0.0F, -2.0F, 1.0F, 3.0F, 5.0F, 0.0F, false);
+        right_wing.setTextureOffset(24, 13).addBox(-1.0F, 3.0F, -2.0F, 1.0F, 3.0F, 5.0F, 0.0F, false);
 
         left_wing = new ModelRenderer(this);
         left_wing.setRotationPoint(2.0F, 14.0F, -1.0F);
-        left_wing.setTextureOffset(38, 13).addBox(0.0F, 0.0F, -2.0F, 1.0F, 3.0F, 5.0F, 0.0F, false);
+        left_wing.setTextureOffset(38, 13).addBox(0.0F, 3.0F, -2.0F, 1.0F, 3.0F, 5.0F, 0.0F, false);
 
         chin = new ModelRenderer(this);
         chin.setRotationPoint(0.0F, 15.0F, -4.0F);
-        chin.setTextureOffset(14, 4).addBox(-1.0F, -1.0F, -3.0F, 2.0F, 1.0F, 2.0F, 0.0F, false);
+        chin.setTextureOffset(14, 4).addBox(-1.0F, 3.0F, -3.0F, 2.0F, 1.0F, 2.0F, 0.0F, false);
 
         tail = new ModelRenderer(this);
-        tail.setRotationPoint(-0.5F, 15.0F, 4.0F);
+        tail.setRotationPoint(-0.5F, 14.0F, 5.0F);
         setRotationAngle(tail, 0.0F, -1.5708F, 0.0F);
-        tail.setTextureOffset(35, 7).addBox(-2.0F, -1.0F, -1.5F, 1.0F, 3.0F, 2.0F, 0.0F, false);
+        tail.setTextureOffset(35, 7).addBox(-2.0F, 3.0F, -1.5F, 1.0F, 3.0F, 2.0F, 0.0F, false);
     }
     
     @Override

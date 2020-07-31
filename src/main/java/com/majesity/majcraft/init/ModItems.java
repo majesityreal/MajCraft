@@ -41,6 +41,8 @@ public class ModItems {
             new BlockItem(ModBlocks.SIFTER.get(), new Item.Properties().group(MajCraft.TAB)));
     public static final RegistryObject<Item> SCREAMING_ITEM = ITEMS.register("screaming", () ->
             new BlockItem(ModBlocks.SCREAMING.get(), new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<Item> BIRD_NEST_ITEM = ITEMS.register("bird_nest", () ->
+            new BlockItem(ModBlocks.BIRD_NEST.get(), new Item.Properties().group(MajCraft.TAB)));
 
     // Tools - base speed is 4.0F
     public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword",() ->

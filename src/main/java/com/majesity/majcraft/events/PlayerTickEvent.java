@@ -21,7 +21,6 @@ public class PlayerTickEvent {
                 if(player.inventory.armorItemInSlot(0)!=null && player.inventory.armorItemInSlot(1)!=null && player.inventory.armorItemInSlot(2)!=null && player.inventory.armorItemInSlot(3)!=null) {
                     if(player.inventory.armorItemInSlot(0).getItem().equals(ModItems.FOREST_BOOTS.get().asItem()) && player.inventory.armorItemInSlot(1).getItem().equals(ModItems.FOREST_LEGGINGS.get().asItem()) && player.inventory.armorItemInSlot(2).getItem().equals(ModItems.FOREST_CHESTPLATE.get().asItem()) && player.inventory.armorItemInSlot(3).getItem().equals(ModItems.FOREST_HELMET.get().asItem())) {
                         if(!player.isPotionActive(Effects.REGENERATION)) { // !player.getActivePotionEffects().contains(Effects.REGENERATION) &&
-                            MajCraft.LOGGER.info("Adding effect");
                             player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 60, 0, false, false));
                         }
                     }
