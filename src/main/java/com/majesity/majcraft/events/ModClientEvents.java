@@ -4,17 +4,22 @@ import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.capabilities.IPlayerData;
 import com.majesity.majcraft.capabilities.PlayerDataProvider;
 import com.majesity.majcraft.init.ModItems;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.CraftingScreen;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonPartEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -91,10 +96,31 @@ public class ModClientEvents {
 
     @SubscribeEvent
     public static void onItemDrop(ItemTossEvent event) {
-        // if the item is a fin ore, then do the stuff
-        if(event.getEntityItem().getItem().getItem().equals(ModItems.FIN_ORE_ITEM.get().getItem())) {
-            event.getPlayer().getEntityWorld().rayTraceBlocks(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)));
-            // ^^ Fix the above, make sure that it is a ender gate block, then if it is do the item drop thing
+        ItemEntity thrownItem = event.getEntityItem();
+        if(thrownItem.getItem().getItem().equals(ModItems.FIN_ORE_ITEM.get().getItem())) {
+            BlockPos itemPos = thrownItem.getPosition();
+            PlayerEntity player = event.getPlayer();
+            Vector3d eyePos = player.getEyePosition(1.0F);
+            Vector3d lookVec = player.getLookVec();
+            double addX = Math.min(Math.abs(lookVec.getX()*100),1);
+            double addY = Math.min(Math.abs(lookVec.getY()*100),1);
+            double addZ = Math.min(Math.abs(lookVec.getZ()*100),1);
+            itemPos.add(addX,addY,addZ);
+            MajCraft.LOGGER.info("Position: " + itemPos.toString());
+            MajCraft.LOGGER.info("Block: " + player.getEntityWorld().getBlockState(itemPos).getBlock().toString());
+            if(player.getEntityWorld().getBlockState(itemPos).equals(Blocks.END_GATEWAY.getDefaultState())) {
+                MajCraft.LOGGER.info("end gateway from thrown!");
+            }
+            BlockRayTraceResult result = player.getEntityWorld().rayTraceBlocks(new RayTraceContext(eyePos, lookVec.mul(5,5,5).add(eyePos), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
+            if(result.getType() == RayTraceResult.Type.BLOCK) {
+                MajCraft.LOGGER.info("result location: " + result.getPos().toString());
+                if(player.getEntityWorld().getBlockState(result.getPos()).equals(Blocks.END_GATEWAY.getDefaultState())) {
+                    MajCraft.LOGGER.info("Yes it is the end gateway!");
+                }
+                if(player.getEntityWorld().getBlockState(result.getPos()).equals(Blocks.END_STONE.getDefaultState())) {
+                    MajCraft.LOGGER.info("it is end stone");
+                }
+            }
         }
     }
 

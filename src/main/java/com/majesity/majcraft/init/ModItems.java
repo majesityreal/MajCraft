@@ -33,6 +33,7 @@ public class ModItems {
     public static final RegistryObject<WandSnowball> SNOWBALL_WAND = ITEMS.register("snowball_wand", WandSnowball::new);
     public static final RegistryObject<Item> BEAK = ITEMS.register("beak", ItemBase::new);
     public static final RegistryObject<Item> FOREST_TANGLE = ITEMS.register("forest_tangle", ItemBase::new);
+    public static final RegistryObject<Item> FIN = ITEMS.register("fin", ItemBase::new);
 
     // Block Items
     public static final RegistryObject<Item> RUBY_BLOCK_ITEM = ITEMS.register("ruby_block", () ->

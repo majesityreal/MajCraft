@@ -8,6 +8,7 @@
   "item.majcraft.snowball_wand": "Snowball Wand",
   "item.majcraft.beak": "Beak",
   "item.majcraft.forest_tangle": "Forest Tangle",
+  "item.majcraft.fin": "Fin",
   "item.majcraft.ruby_helmet": "Ruby Helmet",
   "item.majcraft.ruby_chestplate": "Ruby Chestplate",
   "item.majcraft.ruby_leggings": "Ruby Leggings",
@@ -27,6 +28,7 @@
   "block.majcraft.ruby_block": "Block of Ruby",
   "block.majcraft.sifter": "Sifter",
   "block.majcraft.bird_nest": "Birds Nest",
+  "block.majcraft.fin_ore": "Fin Ore",
   "entity.majcraft.hog": "Hog",
   "entity.majcraft.bird": "Bird",
   "itemGroup.tutorialTab": "MajCraft"

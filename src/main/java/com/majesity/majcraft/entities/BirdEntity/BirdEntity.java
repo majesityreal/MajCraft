@@ -408,11 +408,6 @@ public class BirdEntity extends AnimalEntity implements IFlyingAnimal {
         Vector3d vector3d = new Vector3d(this.getPosX(), this.getPosYEye(), this.getPosZ());
         Vector3d vector3d1 = new Vector3d(targetPosition.getX(), targetPosition.getY(), targetPosition.getZ());
         Boolean bool = !(this.world.rayTraceBlocks(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS);
-        if(bool) {
-            MajCraft.LOGGER.info("Yes path is blocked");
-        } else {
-            // MajCraft.LOGGER.info("No path is NOT blocked");
-        }
         return bool;
     }
 
