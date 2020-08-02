@@ -34,7 +34,7 @@ public class ModOreGen {
 
             //End Generation
             } else if(biome.getCategory() == Biome.Category.THEEND) {
-                genOre(biome, 15, 3, 5, 100, END_STONE, ModBlocks.RUBY_BLOCK.get().getDefaultState(), 6);
+                genOre(biome, 15, 3, 5, 40, END_STONE, ModBlocks.FIN_ORE.get().getDefaultState(), 6);
 
                 //World Generation
             } else {

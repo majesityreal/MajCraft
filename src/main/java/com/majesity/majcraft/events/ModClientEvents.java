@@ -3,15 +3,26 @@ package com.majesity.majcraft.events;
 import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.capabilities.IPlayerData;
 import com.majesity.majcraft.capabilities.PlayerDataProvider;
+import com.majesity.majcraft.init.ModItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.CraftingScreen;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonPartEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.math.RayTraceContext;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.ServerChatEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -57,11 +68,34 @@ public class ModClientEvents {
 
 
 
-
         /* if(player.getHeldItemMainhand().getItem() == Items.STICK) {
             World world = player.getEntityWorld();
             world.setBlockState(player.func_233580_cy_().add(0,-1,0), RegistryHandler.RUBY_BLOCK.get().getDefaultState());
         } */
+    }
+
+    // THIS WORKS FOR SOME REASON ON THE CLIENT
+   /* @SubscribeEvent
+    public static void onServerChat(ServerChatEvent event) {
+        MajCraft.LOGGER.info("HEY HEY" + event.getMessage());
+    } */
+
+    // this fires twice
+    @SubscribeEvent
+    public static void onEntityDeath(LivingDeathEvent event) {
+        if (event.getEntityLiving() instanceof EnderDragonEntity) {
+            MajCraft.LOGGER.info("ENDER DRAGON HAS DIED!!! FIRE EVENTS, LIVING");
+            // if world isn't hardmode, then do this stuff and set it to hardmode
+        }
+    }
+
+    @SubscribeEvent
+    public static void onItemDrop(ItemTossEvent event) {
+        // if the item is a fin ore, then do the stuff
+        if(event.getEntityItem().getItem().getItem().equals(ModItems.FIN_ORE_ITEM.get().getItem())) {
+            event.getPlayer().getEntityWorld().rayTraceBlocks(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)));
+            // ^^ Fix the above, make sure that it is a ender gate block, then if it is do the item drop thing
+        }
     }
 
     /* @SubscribeEvent
