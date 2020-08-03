@@ -6,6 +6,7 @@ import com.majesity.majcraft.entities.HogEntity;
 import com.majesity.majcraft.init.ModEntityTypes;
 import com.majesity.majcraft.init.ModItems;
 import com.majesity.majcraft.init.ModBlocks;
+import com.majesity.majcraft.init.ModTileEntities;
 import com.majesity.majcraft.util.SoundInit;
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
@@ -53,6 +54,7 @@ public class MajCraft
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEntityTypes.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModTileEntities.TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         SoundInit.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
 

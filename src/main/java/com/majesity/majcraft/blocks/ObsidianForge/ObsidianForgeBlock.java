@@ -2,7 +2,7 @@ package com.majesity.majcraft.blocks.ObsidianForge;
 
 import java.util.Random;
 
-import com.majesity.majcraft.blocks.ObsidianForge.old.ObsidianForgeTileEntity;
+import com.majesity.majcraft.MajCraft;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
@@ -23,6 +23,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
 
+import javax.annotation.Nullable;
+
 public class ObsidianForgeBlock extends AbstractFurnaceBlock {
     public ObsidianForgeBlock(AbstractBlock.Properties builder) {
         super(builder);
@@ -38,8 +40,23 @@ public class ObsidianForgeBlock extends AbstractFurnaceBlock {
         );
     }
 
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+         return createNewTileEntity(world);
+    }
+
+    @Nullable
+    @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
         return new ObsidianForgeTileEntity();
+    }
+
+    // not needed if your block implements ITileEntityProvider (in this case implemented by BlockContainer), but it
+    //  doesn't hurt to include it anyway...
+    @Override
+    public boolean hasTileEntity(BlockState state)
+    {
+        return true;
     }
 
     /**
@@ -52,8 +69,13 @@ public class ObsidianForgeBlock extends AbstractFurnaceBlock {
             player.openContainer((INamedContainerProvider)tileentity);
             player.addStat(Stats.INTERACT_WITH_FURNACE);
         }
+        else {
+            MajCraft.LOGGER.info("Not the obsidian forge tile entity :(");
+        }
 
     }
+
+
 
     /**
      * Called periodically clientside on blocks near the player to show effects (like furnace fire particles). Note that

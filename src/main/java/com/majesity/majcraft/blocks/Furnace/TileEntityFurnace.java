@@ -329,7 +329,7 @@ public class TileEntityFurnace extends TileEntity implements INamedContainerProv
 
     // This is where you save any data that you don't want to lose when the tile entity unloads
     // In this case, it saves the state of the furnace (burn time etc) and the itemstacks stored in the fuel, input, and output slots
-    @Override
+   // @Override
     public CompoundNBT write(CompoundNBT parentNBTTagCompound)
     {
         super.write(parentNBTTagCompound); // The super call is required to save and load the tile's location
@@ -342,10 +342,10 @@ public class TileEntityFurnace extends TileEntity implements INamedContainerProv
     }
 
     // This is where you load the data that you saved in writeToNBT
-    // @Override
-    public void read(CompoundNBT nbtTagCompound)
+    @Override
+    public void read(BlockState state, CompoundNBT nbtTagCompound)
     {
-        super.read(this.world.getBlockState(this.pos),nbtTagCompound); // The super call is required to save and load the tile's location
+        super.read(state, nbtTagCompound); // The super call is required to save and load the tile's location
 
         furnaceStateData.readFromNBT(nbtTagCompound);
 
@@ -379,7 +379,7 @@ public class TileEntityFurnace extends TileEntity implements INamedContainerProv
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         CompoundNBT updateTagDescribingTileEntityState = pkt.getNbtCompound();
-        handleUpdateTag(updateTagDescribingTileEntityState);
+        handleUpdateTag(this.world.getBlockState(pkt.getPos()),updateTagDescribingTileEntityState);
     }
 
     /* Creates a tag containing the TileEntity information, used by vanilla to transmit from server to client
@@ -396,8 +396,8 @@ public class TileEntityFurnace extends TileEntity implements INamedContainerProv
     /* Populates this TileEntity with information from the tag, used by vanilla to transmit from server to client
      *  The vanilla default is suitable for this example but I've included an explicit definition anyway.
      */
-    // @Override
-    public void handleUpdateTag(CompoundNBT tag) { read(tag); }
+    @Override
+    public void handleUpdateTag(BlockState state, CompoundNBT tag) { read(state, tag); }
 
     /**
      * When this tile entity is destroyed, drop all of its contents into the world

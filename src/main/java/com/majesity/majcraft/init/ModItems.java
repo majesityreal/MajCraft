@@ -50,6 +50,8 @@ public class ModItems {
             new BlockItem(ModBlocks.OBSIDIAN_FORGE.get(), new Item.Properties().group(MajCraft.TAB)));
     public static final RegistryObject<Item> FURNACE = ITEMS.register("furnace", () ->
             new BlockItem(ModBlocks.FURNACE.get(), new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<Item> END_FORGE = ITEMS.register("end_forge", () ->
+            new BlockItem(ModBlocks.END_FORGE.get(), new Item.Properties().group(MajCraft.TAB)));
 
     // Tools - base speed is 4.0F
     public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword",() ->

@@ -1,8 +1,11 @@
 package com.majesity.majcraft.events;
 
 import com.majesity.majcraft.MajCraft;
+import com.majesity.majcraft.blocks.Furnace.TileEntityFurnace;
+import com.majesity.majcraft.blocks.ObsidianForge.ObsidianForgeTileEntity;
 import com.majesity.majcraft.capabilities.IPlayerData;
 import com.majesity.majcraft.capabilities.PlayerDataProvider;
+import com.majesity.majcraft.init.ModBlocks;
 import com.majesity.majcraft.init.ModItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
@@ -15,6 +18,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
@@ -25,6 +29,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -35,6 +40,20 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = MajCraft.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ModClientEvents {
+
+    @SubscribeEvent
+    public static void registerFurnaceTE(RegistryEvent.Register<TileEntityType<?>> evt) {
+        TileEntityType<?> type = TileEntityType.Builder.create(TileEntityFurnace::new, ModBlocks.FURNACE.get()).build(null);
+        type.setRegistryName(MajCraft.MOD_ID, "furnace");
+        evt.getRegistry().register(type);
+    }
+
+    @SubscribeEvent
+    public static void registerObsidianForgeTE(RegistryEvent.Register<TileEntityType<?>> evt) {
+        TileEntityType<?> type = TileEntityType.Builder.create(ObsidianForgeTileEntity::new, ModBlocks.OBSIDIAN_FORGE.get()).build(null);
+        type.setRegistryName(MajCraft.MOD_ID, "obsidian_forge");
+        evt.getRegistry().register(type);
+    }
 
     @SubscribeEvent // LivingEntity#func_233480_cy_() --> LivingEntity#getPosition()
     public static void onJump(LivingEvent.LivingJumpEvent event) {

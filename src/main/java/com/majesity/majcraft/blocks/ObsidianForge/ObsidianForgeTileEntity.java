@@ -1,4 +1,4 @@
-package com.majesity.majcraft.blocks.ObsidianForge.old;
+package com.majesity.majcraft.blocks.ObsidianForge;
 
 import com.majesity.majcraft.blocks.ObsidianForge.ObsidianForgeContainer;
 import net.minecraft.entity.player.PlayerInventory;
