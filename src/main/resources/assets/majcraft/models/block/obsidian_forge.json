@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "majcraft:blocks/obsidian_forge/obsidian_forge_top",
+    "front": "majcraft:blocks/obsidian_forge/obsidian_forge_front",
+    "side": "majcraft:blocks/obsidian_forge/obsidian_forge_side"
+  }
+}

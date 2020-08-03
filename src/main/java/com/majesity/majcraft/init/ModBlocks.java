@@ -2,6 +2,8 @@ package com.majesity.majcraft.init;
 
 import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.blocks.*;
+import com.majesity.majcraft.blocks.Furnace.BlockInventoryFurnace;
+import com.majesity.majcraft.blocks.ObsidianForge.ObsidianForgeBlock;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,5 +19,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> SCREAMING = BLOCKS.register("screaming", Screaming::new);
     public static final RegistryObject<Block> BIRD_NEST = BLOCKS.register("bird_nest", BirdNest::new);
     public static final RegistryObject<Block> FIN_ORE = BLOCKS.register("fin_ore", FinOre::new);
+    public static final RegistryObject<Block> OBSIDIAN_FORGE = BLOCKS.register("obsidian_forge", ObsidianForgeBlock::new);
+    public static final RegistryObject<Block> FURNACE = BLOCKS.register("furnace", BlockInventoryFurnace::new);
+
 
 }

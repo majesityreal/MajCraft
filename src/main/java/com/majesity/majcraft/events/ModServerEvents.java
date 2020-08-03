@@ -1,16 +1,27 @@
 package com.majesity.majcraft.events;
 
 import com.majesity.majcraft.MajCraft;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonPartEntity;
+import com.majesity.majcraft.blocks.ObsidianForge.old.ObsidianForgeTileEntity;
+import com.majesity.majcraft.init.ModBlocks;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.ServerChatEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.loading.FMLPaths;
+
+import javax.annotation.Nonnull;
 
 @Mod.EventBusSubscriber(modid = MajCraft.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.DEDICATED_SERVER)
 public class ModServerEvents {
+
+   /* @SubscribeEvent
+    public static void registerTE(RegistryEvent.Register<TileEntityType<?>> evt) {
+        TileEntityType<?> type = TileEntityType.Builder.create(ObsidianForgeTileEntity::new, ModBlocks.OBSIDIAN_FORGE.get()).build(null);
+        type.setRegistryName("mymod", "myte");
+        evt.getRegistry().register(type);
+    } */
 
     @SubscribeEvent
     public static void onServerChat(ServerChatEvent event) {
