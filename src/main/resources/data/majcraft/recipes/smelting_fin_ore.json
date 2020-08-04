@@ -1,0 +1,12 @@
+{
+  "type": "majcraft:obsidian_forge",
+  "crushingTime": 200,
+  "experience": 100.0,
+  "ingredient": {
+    "item": "minecraft:gold_ingot"
+  },
+  "result": {
+    "item": "minecraft:gold_ingot",
+    "count": 2
+  }
+}

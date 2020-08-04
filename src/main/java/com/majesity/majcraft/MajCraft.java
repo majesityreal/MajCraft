@@ -1,16 +1,19 @@
 package com.majesity.majcraft;
 
+import com.majesity.majcraft.blocks.obsidianForge.ObsidianForgeRecipes;
 import com.majesity.majcraft.capabilities.*;
 import com.majesity.majcraft.entities.BirdEntity.BirdEntity;
 import com.majesity.majcraft.entities.HogEntity;
-import com.majesity.majcraft.init.ModEntityTypes;
-import com.majesity.majcraft.init.ModItems;
-import com.majesity.majcraft.init.ModBlocks;
-import com.majesity.majcraft.init.ModTileEntities;
+import com.majesity.majcraft.gui.BlockObsidianForgeScreen;
+import com.majesity.majcraft.init.*;
+import com.majesity.majcraft.proxy.ClientProxy;
+import com.majesity.majcraft.proxy.IProxy;
+import com.majesity.majcraft.proxy.ServerProxy;
 import com.majesity.majcraft.util.SoundInit;
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
 import net.java.games.input.Keyboard;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
@@ -21,6 +24,7 @@ import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -39,6 +43,9 @@ public class MajCraft
     public static final String MOD_ID = "majcraft";
     // key bindings :)
      public static KeyBinding[] keyBindings;
+     // proxy
+     public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
+
 
     public MajCraft() {
         // Register the setup method for modloading
@@ -55,11 +62,13 @@ public class MajCraft
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEntityTypes.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModTileEntities.TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModContainers.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         SoundInit.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         // Register for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -76,6 +85,10 @@ public class MajCraft
         // weight list (animals): 20=33%, 10=20%, 2=4.7%, 0.2=0.5% (golden bunny or something)
         registerEntityWorldSpawn(ModEntityTypes.HOG.get(), 12, 3, 10, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.SHATTERED_SAVANNA, Biomes.SHATTERED_SAVANNA_PLATEAU);
         registerEntityWorldSpawn(ModEntityTypes.BIRD.get(), 120, 3, 100, Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.FLOWER_FOREST);
+
+        // this registers the recipes for furnaces
+        registerFurnaceRecipes();
+
         // some preinit code
         // LOGGER.info("HELLO FROM PREINIT");
         // LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
@@ -90,6 +103,11 @@ public class MajCraft
         {
             ClientRegistry.registerKeyBinding(keyBindings[i]);
         }
+
+        // register the screen for the furnace
+        ScreenManager.registerFactory(ModContainers.OBSIDIAN_FORGE_CONTAINER.get(), BlockObsidianForgeScreen::new);
+
+
         // do something that can only be done on the client
         // LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
@@ -112,6 +130,10 @@ public class MajCraft
 
     public static KeyBinding[] getKeyBindings() {
         return keyBindings;
+    }
+
+    public static void registerFurnaceRecipes() {
+        ObsidianForgeRecipes.registerRecipe(ModItems.FIN_ORE_ITEM.get(),ModItems.FIN.get(),1,100,0);
     }
 
     /*

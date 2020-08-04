@@ -1,4 +1,4 @@
-package com.majesity.majcraft.tileentity;
+/*package com.majesity.majcraft.tileentity;
 
 import com.majesity.majcraft.blocks.EndForge.EndForge;
 import com.majesity.majcraft.init.ModTileEntityTypes;
@@ -48,4 +48,4 @@ public class EndForgeTileEntity extends TileEntity implements ITickableTileEntit
         }
     }
 
-}
+}*/
