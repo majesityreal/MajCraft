@@ -45,7 +45,7 @@ public class ModItems {
     public static final RegistryObject<Item> BIRD_NEST_ITEM = ITEMS.register("bird_nest", () ->
             new BlockItem(ModBlocks.BIRD_NEST.get(), new Item.Properties().group(MajCraft.TAB)));
     public static final RegistryObject<Item> FIN_ORE_ITEM = ITEMS.register("fin_ore", () ->
-            new BlockItem(ModBlocks.FIN_ORE.get(), new Item.Properties().group(MajCraft.TAB).isBurnable()));
+            new BlockItem(ModBlocks.FIN_ORE.get(), new Item.Properties().group(MajCraft.TAB)));
     public static final RegistryObject<Item> OBSIDIAN_FORGE = ITEMS.register("obsidian_forge", () ->
             new BlockItem(ModBlocks.OBSIDIAN_FORGE.get(), new Item.Properties().group(MajCraft.TAB)));
     public static final RegistryObject<Item> FURNACE = ITEMS.register("furnace", () ->

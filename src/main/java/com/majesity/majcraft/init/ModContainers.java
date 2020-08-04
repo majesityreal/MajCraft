@@ -18,4 +18,6 @@ public class ModContainers {
         return new BlockObsidianForgeContainer(windowId, MajCraft.proxy.getClientWorld(), pos, inv, MajCraft.proxy.getClientPlayer());
     }));
 
+
+
 }

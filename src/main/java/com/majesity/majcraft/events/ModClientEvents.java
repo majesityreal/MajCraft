@@ -22,11 +22,19 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = MajCraft.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ModClientEvents {
+
+    @SubscribeEvent
+    public static void onFurnaceFuel(FurnaceFuelBurnTimeEvent event) {
+        if(event.getItemStack().getItem().equals(ModItems.FIN_ORE_ITEM)) {
+            MajCraft.LOGGER.info("The item is a fine ore");
+        }
+    }
 
     @SubscribeEvent
     public static void registerFurnaceTE(RegistryEvent.Register<TileEntityType<?>> evt) {

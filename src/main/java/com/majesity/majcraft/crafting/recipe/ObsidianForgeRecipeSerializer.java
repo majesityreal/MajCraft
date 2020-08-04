@@ -94,4 +94,8 @@ public class ObsidianForgeRecipeSerializer<T extends ObsidianForgeRecipe> extend
     public interface IFactory<T extends ObsidianForgeRecipe> {
         T create(ResourceLocation resourceLocation, String group, Ingredient ingredient, ItemStack result, int cookTime);
     }
+
+    public ObsidianForgeRecipeSerializer.IFactory<T> getFactory() {
+        return factory;
+    }
 }

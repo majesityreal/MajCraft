@@ -1,12 +1,12 @@
 {
   "type": "majcraft:obsidian_forge",
-  "furnaceTime": 150,
-  "experience": 100.0,
+  "furnaceTime": 0,
+  "experience": 1.0,
   "ingredient": {
     "item": "majcraft:fin_ore"
   },
   "result": {
     "item": "majcraft:fin",
-    "count": 2
+    "count": 1
   }
 }

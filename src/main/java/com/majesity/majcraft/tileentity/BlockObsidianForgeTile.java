@@ -51,22 +51,21 @@ public class BlockObsidianForgeTile extends BlockIronFurnaceTileBase {
     }
 
     // make this zero?
-    // fact: slot 2 is the output slot
+    // fact: slot 2 is the output slot, slot 0 is the input slot (non fuel)
     @Override
     protected int getCookTime() {
         ItemStack stack = this.getStackInSlot(0);
        // ObsidianForgeRecipe recipe = world.getRecipeManager().getRecipe(ObsidianForgeRecipe.obsidian_forge, inventory, world).orElse(null);
-        ObsidianForgeRecipe recipe = world.getRecipeManager().getRecipe(ObsidianForgeRecipe.obsidian_forge, recipeWrapper, world).orElse(null);
-        MajCraft.LOGGER.info("Result: "+ recipe.getRecipeOutput().toString());
+       // ObsidianForgeRecipe recipe = world.getRecipeManager().getRecipe(ObsidianForgeRecipe.obsidian_forge, recipeWrapper, world).orElse(null);
+        // MajCraft.LOGGER.info("Result: "+ recipe.getRecipeOutput().toString());
         if (!stack.isEmpty()) {
-            MajCraft.LOGGER.info("The item in slot 0 is: " + stack.toString());
             if(ObsidianForgeRecipes.getRecipeResult(stack)!=null) {
-                MajCraft.LOGGER.info("burn time: " + ObsidianForgeRecipes.getRecipeResult(stack).getBurnTime());
-                return ObsidianForgeRecipes.getRecipeResult(stack).getBurnTime();
+                return ObsidianForgeRecipes.getBurnTime(stack);
             }
             MajCraft.LOGGER.info("The stack is not empty but the recipe did not register, defaulting to 0");
+            return 80;
         }
-        return 0;
+        return 80;
     }
 
     private static String stringToBlack(String parString)

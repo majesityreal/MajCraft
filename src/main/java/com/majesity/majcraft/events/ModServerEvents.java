@@ -1,8 +1,10 @@
 package com.majesity.majcraft.events;
 
 import com.majesity.majcraft.MajCraft;
+import com.majesity.majcraft.init.ModItems;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.ServerChatEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -15,6 +17,9 @@ public class ModServerEvents {
         type.setRegistryName("mymod", "myte");
         evt.getRegistry().register(type);
     } */
+
+
+
 
     @SubscribeEvent
     public static void onServerChat(ServerChatEvent event) {

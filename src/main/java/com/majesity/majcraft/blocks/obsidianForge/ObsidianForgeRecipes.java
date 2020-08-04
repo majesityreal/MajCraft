@@ -43,4 +43,13 @@ public class ObsidianForgeRecipes
         }
     }
 
+    public static int getBurnTime(ItemStack input) {
+        if(recipes.containsKey(input.getItem())) {
+            return recipes.get(input.getItem()).time;
+        }
+        else {
+            return -1;
+        }
+    }
+
 }
