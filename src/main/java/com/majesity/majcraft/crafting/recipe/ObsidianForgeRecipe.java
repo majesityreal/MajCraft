@@ -2,7 +2,6 @@ package com.majesity.majcraft.crafting.recipe;
 
 import com.majesity.majcraft.init.ModBlocks;
 import com.majesity.majcraft.init.ModRecipeSerializers;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -23,15 +22,15 @@ public class ObsidianForgeRecipe implements IRecipe<RecipeWrapper> {
     final String group;
     final Ingredient ingredient;
     final ItemStack result;
-    final int caskTime;
+    final int cookTime;
 
-    public ObsidianForgeRecipe(ResourceLocation resourceLocation, String group, Ingredient ingredient, ItemStack result, int caskTime) {
+    public ObsidianForgeRecipe(ResourceLocation resourceLocation, String group, Ingredient ingredient, ItemStack result, int cookTime) {
         type = obsidian_forge;
         id = resourceLocation;
         this.group = group;
         this.ingredient = ingredient;
         this.result = result;
-        this.caskTime = caskTime;
+        this.cookTime = cookTime;
     }
 
     @Override
@@ -81,7 +80,7 @@ public class ObsidianForgeRecipe implements IRecipe<RecipeWrapper> {
         return new ItemStack(ModBlocks.OBSIDIAN_FORGE.get());
     }
 
-    public int getCaskTime() {
-        return caskTime;
+    public int getCookTime() {
+        return cookTime;
     }
 }

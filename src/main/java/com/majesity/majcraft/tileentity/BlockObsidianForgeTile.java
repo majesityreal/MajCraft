@@ -66,7 +66,7 @@ public class BlockObsidianForgeTile extends BlockIronFurnaceTileBase {
             }
             MajCraft.LOGGER.info("The stack is not empty but the recipe did not register, defaulting to 0");
         }
-        return 100000;
+        return 0;
     }
 
     private static String stringToBlack(String parString)

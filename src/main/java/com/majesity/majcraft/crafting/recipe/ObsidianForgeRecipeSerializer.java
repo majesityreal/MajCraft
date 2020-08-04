@@ -52,10 +52,10 @@ public class ObsidianForgeRecipeSerializer<T extends ObsidianForgeRecipe> extend
             resultItemStack = new ItemStack(ForgeRegistries.ITEMS.getValue(resultRS));
         }
 
-        // caskTime
-        int caskTime = JSONUtils.getInt(json, "caskTime", 200);
+        // cookTime
+        int cookTime = JSONUtils.getInt(json, "furnaceTime", 200);
 
-        return this.factory.create(recipeId, groupString, ingredient, resultItemStack, caskTime);
+        return this.factory.create(recipeId, groupString, ingredient, resultItemStack, cookTime);
     }
 
     @Nullable
@@ -70,10 +70,10 @@ public class ObsidianForgeRecipeSerializer<T extends ObsidianForgeRecipe> extend
         // result
         ItemStack itemstack = buffer.readItemStack();
 
-        // caskTime
-        int caskTime = buffer.readVarInt();
+        // cookTime
+        int cookTime = buffer.readVarInt();
 
-        return this.factory.create(recipeId, groupString, ingredient, itemstack, caskTime);
+        return this.factory.create(recipeId, groupString, ingredient, itemstack, cookTime);
     }
 
     @Override
@@ -87,11 +87,11 @@ public class ObsidianForgeRecipeSerializer<T extends ObsidianForgeRecipe> extend
         // result
         buffer.writeItemStack(recipe.result);
 
-        // caskTime
-        buffer.writeVarInt(recipe.caskTime);
+        // cookTime
+        buffer.writeVarInt(recipe.cookTime);
     }
 
     public interface IFactory<T extends ObsidianForgeRecipe> {
-        T create(ResourceLocation resourceLocation, String group, Ingredient ingredient, ItemStack result, int caskTime);
+        T create(ResourceLocation resourceLocation, String group, Ingredient ingredient, ItemStack result, int cookTime);
     }
 }

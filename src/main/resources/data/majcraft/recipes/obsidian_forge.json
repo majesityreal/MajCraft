@@ -1,12 +1,12 @@
 {
   "type": "majcraft:obsidian_forge",
-  "crushingTime": 200,
+  "furnaceTime": 150,
   "experience": 100.0,
   "ingredient": {
-    "item": "minecraft:gold_ingot"
+    "item": "majcraft:fin_ore"
   },
   "result": {
-    "item": "minecraft:gold_ingot",
+    "item": "majcraft:fin",
     "count": 2
   }
 }

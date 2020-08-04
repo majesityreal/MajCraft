@@ -1,0 +1,6 @@
+{
+  "recipes": {
+    "obsidian_forge": "com.majesity.majcraft.crafting.recipe.ObsidianForgeRecipe$Factory",
+    "obsidian_forge": "com.majesity.majcraft.crafting.recipe.ObsidianForgeRecipe"
+  }
+}
