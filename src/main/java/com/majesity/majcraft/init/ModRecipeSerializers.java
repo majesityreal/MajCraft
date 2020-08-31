@@ -11,8 +11,11 @@ import net.minecraft.block.Block;
 import net.minecraft.client.gui.recipebook.RecipeList;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.RegistryObject;
@@ -26,9 +29,11 @@ import static com.majesity.majcraft.init.ModUtil.Null;
 @ObjectHolder(MajCraft.MOD_ID)
 public class ModRecipeSerializers {
 
-    public static final DeferredRegister<IRecipeSerializer<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MajCraft.MOD_ID);
+    // public static final DeferredRegister<IRecipeSerializer<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MajCraft.MOD_ID);
 
-    public static final RegistryObject<ObsidianForgeRecipeSerializer<ObsidianForgeRecipe>> OBSIDIAN_FORGE_RECIPES = RECIPES.register("obsidian_forge", ObsidianForgeRecipeSerializer);
+
+    // public static final RegistryObject<ObsidianForgeRecipeSerializer<ObsidianForgeRecipe>> OBSIDIAN_FORGE_RECIPES = RECIPES.register("obsidian_forge",new ObsidianForgeRecipeSerializer<>(ObsidianForgeRecipe::new));
+
 
     public static final ObsidianForgeRecipeSerializer<ObsidianForgeRecipe> OBSIDIAN_FORGE = Null();
 }

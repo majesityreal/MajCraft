@@ -9,6 +9,8 @@
   "item.majcraft.beak": "Beak",
   "item.majcraft.forest_tangle": "Forest Tangle",
   "item.majcraft.fin": "Fin",
+  "item.majcraft.molten_powder": "Molten Powder",
+  "item.majcraft.molten_ingot": "Molten Ingot",
   "item.majcraft.ruby_helmet": "Ruby Helmet",
   "item.majcraft.ruby_chestplate": "Ruby Chestplate",
   "item.majcraft.ruby_leggings": "Ruby Leggings",
@@ -29,6 +31,7 @@
   "block.majcraft.sifter": "Sifter",
   "block.majcraft.bird_nest": "Birds Nest",
   "block.majcraft.fin_ore": "Fin Ore",
+  "block.majcraft.obsidian_forge": "Obsidian Forge",
   "entity.majcraft.hog": "Hog",
   "entity.majcraft.bird": "Bird",
   "itemGroup.tutorialTab": "MajCraft"

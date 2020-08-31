@@ -1,6 +1,8 @@
 package com.majesity.majcraft.crafting.recipe;
 
+import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.init.ModBlocks;
+import com.majesity.majcraft.init.ModItems;
 import com.majesity.majcraft.init.ModRecipeSerializers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -31,6 +33,15 @@ public class ObsidianForgeRecipe implements IRecipe<RecipeWrapper> {
         this.ingredient = ingredient;
         this.result = result;
         this.cookTime = cookTime;
+    }
+
+    public ObsidianForgeRecipe() {
+        type = obsidian_forge;
+        id = new ResourceLocation(MajCraft.MOD_ID,"/resources/data/majcraft/recipes/smelting_obsidian_forge.json");
+        this.group = "obsidian_forge";
+        this.result = new ItemStack(ModItems.FIN.get());
+        this.ingredient = Ingredient.fromStacks(result);
+        this.cookTime = 80;
     }
 
     @Override

@@ -1,12 +1,22 @@
 {
-  "type": "majcraft:obsidian_forge",
-  "furnaceTime": 0,
-  "experience": 1.0,
-  "ingredient": {
-    "item": "majcraft:fin_ore"
-  },
-  "result": {
-    "item": "majcraft:fin",
-    "count": 1
-  }
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "#F#",
+        "III"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:obsidian"
+        },
+        "F": {
+            "item": "minecraft:fire_charge"
+        },
+        "I": {
+            "item": "minecraft:iron_block"
+        }
+    },
+    "result": {
+        "item": "majcraft:obsidian_forge"
+    }
 }
