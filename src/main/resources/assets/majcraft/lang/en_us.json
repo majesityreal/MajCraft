@@ -27,6 +27,10 @@
   "item.majcraft.melon_chestplate": "Melon Chestplate",
   "item.majcraft.melon_leggings": "Melon Leggings",
   "item.majcraft.melon_boots": "Melon Boots",
+  "item.majcraft.molten_helmet": "Molten Helmet",
+  "item.majcraft.molten_chestplate": "Molten Chestplate",
+  "item.majcraft.molten_leggings": "Molten Leggings",
+  "item.majcraft.molten_boots": "Molten Boots",
   "block.majcraft.ruby_block": "Block of Ruby",
   "block.majcraft.sifter": "Sifter",
   "block.majcraft.bird_nest": "Birds Nest",
@@ -34,5 +38,6 @@
   "block.majcraft.obsidian_forge": "Obsidian Forge",
   "entity.majcraft.hog": "Hog",
   "entity.majcraft.bird": "Bird",
+  "entity.majcraft.crawler": "Crawler",
   "itemGroup.tutorialTab": "MajCraft"
 }

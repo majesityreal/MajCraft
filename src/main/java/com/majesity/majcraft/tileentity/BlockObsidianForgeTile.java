@@ -1,7 +1,6 @@
 package com.majesity.majcraft.tileentity;
 
 import com.majesity.majcraft.MajCraft;
-import com.majesity.majcraft.blocks.failedFurnace.ObsidianForge.ObsidianForgeTileEntity;
 import com.majesity.majcraft.blocks.obsidianForge.ObsidianForgeRecipes;
 import com.majesity.majcraft.blocks.obsidianForge.container.BlockObsidianForgeContainer;
 import com.majesity.majcraft.crafting.recipe.ObsidianForgeRecipe;
@@ -62,7 +61,7 @@ public class BlockObsidianForgeTile extends BlockIronFurnaceTileBase {
             if(ObsidianForgeRecipes.getRecipeResult(stack)!=null) {
                 return ObsidianForgeRecipes.getBurnTime(stack);
             }
-            MajCraft.LOGGER.info("The stack is not empty but the recipe did not register, defaulting to 0");
+            // MajCraft.LOGGER.info("The stack is not empty but the recipe did not register, defaulting to 0");
             return 80;
         }
         return 80;

@@ -3,6 +3,7 @@ package com.majesity.majcraft;
 import com.majesity.majcraft.blocks.obsidianForge.ObsidianForgeRecipes;
 import com.majesity.majcraft.capabilities.*;
 import com.majesity.majcraft.entities.BirdEntity.BirdEntity;
+import com.majesity.majcraft.entities.CrawlerEntity;
 import com.majesity.majcraft.entities.HogEntity;
 import com.majesity.majcraft.gui.BlockObsidianForgeScreen;
 import com.majesity.majcraft.init.*;
@@ -75,11 +76,11 @@ public class MajCraft
     {
         CapabilityManager.INSTANCE.register(IPlayerData.class, new PlayerDataStorage(), PlayerDataFactory::new);
 
-        // This registers the hog itself
         DeferredWorkQueue.runLater(() -> {
             // func_233813_a_() --> .create()
             GlobalEntityTypeAttributes.put(ModEntityTypes.HOG.get(), HogEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntityTypes.BIRD.get(), BirdEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.CRAWLER.get(), CrawlerEntity.setCustomAttributes().create());
         });
         // THIS REGISTERS THE ENTITY AND ITS SPAWNING BIOMES
         // weight list (animals): 20=33%, 10=20%, 2=4.7%, 0.2=0.5% (golden bunny or something)

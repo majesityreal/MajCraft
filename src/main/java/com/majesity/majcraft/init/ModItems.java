@@ -8,6 +8,7 @@ import com.majesity.majcraft.items.WandSnowball;
 import com.majesity.majcraft.items.armor.AvianArmor;
 import com.majesity.majcraft.items.armor.ForestArmor;
 import com.majesity.majcraft.items.armor.MelonArmor;
+import com.majesity.majcraft.items.armor.MoltenArmor;
 import com.majesity.majcraft.util.enums.ModArmorMaterial;
 import com.majesity.majcraft.util.enums.ModItemTier;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -50,10 +51,6 @@ public class ModItems {
             new BlockItem(ModBlocks.FIN_ORE.get(), new Item.Properties().group(MajCraft.TAB)));
     public static final RegistryObject<Item> OBSIDIAN_FORGE = ITEMS.register("obsidian_forge", () ->
             new BlockItem(ModBlocks.OBSIDIAN_FORGE.get(), new Item.Properties().group(MajCraft.TAB)));
-    public static final RegistryObject<Item> FURNACE = ITEMS.register("furnace", () ->
-            new BlockItem(ModBlocks.FURNACE.get(), new Item.Properties().group(MajCraft.TAB)));
-    public static final RegistryObject<Item> END_FORGE = ITEMS.register("end_forge", () ->
-            new BlockItem(ModBlocks.END_FORGE.get(), new Item.Properties().group(MajCraft.TAB)));
 
     // Tools - base speed is 4.0F
     public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword",() ->
@@ -110,4 +107,12 @@ public class ModItems {
     public static final RegistryObject<MelonArmor> MELON_BOOTS = ITEMS.register("melon_boots", () ->
             new MelonArmor(ModArmorMaterial.MELON, EquipmentSlotType.FEET, new Item.Properties().group(MajCraft.TAB)));
 
+    public static final RegistryObject<MoltenArmor> MOLTEN_HELMET = ITEMS.register("molten_helmet", () ->
+            new MoltenArmor(ModArmorMaterial.MOLTEN, EquipmentSlotType.HEAD, new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<MoltenArmor> MOLTEN_CHESTPLATE = ITEMS.register("molten_chestplate", () ->
+            new MoltenArmor(ModArmorMaterial.MOLTEN, EquipmentSlotType.CHEST, new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<MoltenArmor> MOLTEN_LEGGINGS = ITEMS.register("molten_leggings", () ->
+            new MoltenArmor(ModArmorMaterial.MOLTEN, EquipmentSlotType.LEGS, new Item.Properties().group(MajCraft.TAB)));
+    public static final RegistryObject<MoltenArmor> MOLTEN_BOOTS = ITEMS.register("molten_boots", () ->
+            new MoltenArmor(ModArmorMaterial.MOLTEN, EquipmentSlotType.FEET, new Item.Properties().group(MajCraft.TAB)));
 }

@@ -2,7 +2,6 @@ package com.majesity.majcraft.init;
 
 import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.blocks.RubyBlock;
-import com.majesity.majcraft.blocks.failedFurnace.ObsidianForge.ObsidianForgeContainer;
 import com.majesity.majcraft.blocks.obsidianForge.container.BlockObsidianForgeContainer;
 import com.majesity.majcraft.crafting.recipe.ObsidianForgeRecipe;
 import com.majesity.majcraft.crafting.recipe.ObsidianForgeRecipeSerializer;

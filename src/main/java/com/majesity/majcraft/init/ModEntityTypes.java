@@ -2,6 +2,7 @@ package com.majesity.majcraft.init;
 
 import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.entities.BirdEntity.BirdEntity;
+import com.majesity.majcraft.entities.CrawlerEntity;
 import com.majesity.majcraft.entities.HogEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -24,6 +25,11 @@ public class ModEntityTypes {
             () -> EntityType.Builder.create(BirdEntity::new, EntityClassification.CREATURE)
                     .size(0.4f,0.4f)
                     .build(new ResourceLocation(MajCraft.MOD_ID, "bird").toString())
+    );
+    public static final RegistryObject<EntityType<CrawlerEntity>> CRAWLER = ENTITY_TYPES.register("crawler",
+            () -> EntityType.Builder.create(CrawlerEntity::new, EntityClassification.MONSTER)
+                    .size(0.4f,0.4f)
+                    .build(new ResourceLocation(MajCraft.MOD_ID, "crawler").toString())
     );
 
 }

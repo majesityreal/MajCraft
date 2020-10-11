@@ -2,6 +2,7 @@ package com.majesity.majcraft.util;
 
 import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.client.render.BirdRenderer;
+import com.majesity.majcraft.client.render.CrawlerRenderer;
 import com.majesity.majcraft.client.render.HogRenderer;
 import com.majesity.majcraft.init.ModEntityTypes;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,6 +18,7 @@ public class ClientEventBusSubscriber {
     public static void onClientSetup(FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.HOG.get(), HogRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BIRD.get(), BirdRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CRAWLER.get(), CrawlerRenderer::new);
     }
 
 }

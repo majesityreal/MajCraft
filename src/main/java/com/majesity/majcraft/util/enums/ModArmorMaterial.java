@@ -26,7 +26,10 @@ public enum ModArmorMaterial implements IArmorMaterial {
             SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, () -> { return Ingredient.fromItems(ModItems.FOREST_TANGLE.get()); }, getKnockbackResistance(0.1F)),
 
     MELON(MajCraft.MOD_ID + ":melon", 1, new int[] { 1 , 1 , 1 , 1 }, 1,
-            SoundEvents.ENTITY_SLIME_SQUISH, 0.0F, () -> { return Ingredient.fromItems(Items.MELON); }, getKnockbackResistance(0));
+            SoundEvents.ENTITY_SLIME_SQUISH, 0.0F, () -> { return Ingredient.fromItems(Items.MELON); }, getKnockbackResistance(0)),
+
+    MOLTEN(MajCraft.MOD_ID + ":molten", 16, new int[] { 2 , 5 , 4 , 2 }, 18,
+    SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, () -> { return Ingredient.fromItems(ModItems.MOLTEN_INGOT.get()); }, getKnockbackResistance(0));
 
 // enchantability: leather 15, chainmail 12, gold 25, iron 9, diamond 10
 

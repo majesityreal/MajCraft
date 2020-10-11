@@ -1,8 +1,6 @@
 package com.majesity.majcraft.events;
 
 import com.majesity.majcraft.MajCraft;
-import com.majesity.majcraft.blocks.failedFurnace.Furnace.TileEntityFurnace;
-import com.majesity.majcraft.blocks.failedFurnace.ObsidianForge.ObsidianForgeTileEntity;
 import com.majesity.majcraft.capabilities.IPlayerData;
 import com.majesity.majcraft.capabilities.PlayerDataProvider;
 import com.majesity.majcraft.init.ModBlocks;
@@ -34,20 +32,6 @@ public class ModClientEvents {
         if(event.getItemStack().getItem().equals(ModItems.FIN_ORE_ITEM)) {
             MajCraft.LOGGER.info("The item is a fine ore");
         }
-    }
-
-    @SubscribeEvent
-    public static void registerFurnaceTE(RegistryEvent.Register<TileEntityType<?>> evt) {
-        TileEntityType<?> type = TileEntityType.Builder.create(TileEntityFurnace::new, ModBlocks.FURNACE.get()).build(null);
-        type.setRegistryName(MajCraft.MOD_ID, "furnace");
-        evt.getRegistry().register(type);
-    }
-
-    @SubscribeEvent
-    public static void registerObsidianForgeTE(RegistryEvent.Register<TileEntityType<?>> evt) {
-        TileEntityType<?> type = TileEntityType.Builder.create(ObsidianForgeTileEntity::new, ModBlocks.OBSIDIAN_FORGE.get()).build(null);
-        type.setRegistryName(MajCraft.MOD_ID, "obsidian_forge");
-        evt.getRegistry().register(type);
     }
 
     @SubscribeEvent // LivingEntity#func_233480_cy_() --> LivingEntity#getPosition()
