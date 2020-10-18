@@ -1,44 +1,53 @@
-package com.majesity.majcraft.entities;
+package com.majesity.majcraft.entities.projectile;
 
+import com.majesity.majcraft.init.ModEntityTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.AbstractFireballEntity;
-import net.minecraft.entity.projectile.ProjectileItemEntity;
-import net.minecraft.item.Item;
+import net.minecraft.entity.projectile.DamagingProjectileEntity;
+import net.minecraft.entity.projectile.DragonFireballEntity;
+import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class WandSnowballEntity extends ProjectileItemEntity {
+public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity {
     public int explosionPower = 0;
-    public double explosionRadius = 1.5;
+    public double explosionRadius = 2.0;
 
-    public WandSnowballEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn) {
+   /* public CrawlerVenomEntity(EntityType<CrawlerVenomEntity> type, World worldIn) {
         super(type, worldIn);
+    }*/
+
+    public CrawlerVenomEntity(EntityType<? extends DamagingProjectileEntity> entity, World world) {
+        super((EntityType<DamagingProjectileEntity>) entity, world);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public WandSnowballEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
-        super(type, x, y, z, worldIn);
-        this.setVelocity(accelX,accelY,accelZ);
+    public CrawlerVenomEntity(EntityType<? extends CrawlerVenomEntity> type, World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
+        super(type, x, y, z, accelX, accelY, accelZ, worldIn);
+        this.setVelocity(accelX, accelY, accelZ);
     }
 
-    /*
-    public WandSnowballEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
-        super(EntityType.SNOWBALL, shooter, accelX, accelY, accelZ, worldIn);
-    } */
+    //
+
+    @OnlyIn(Dist.CLIENT)
+    public CrawlerVenomEntity(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
+        super(ModEntityTypes.CRAWLER_VENOM.get(), x, y, z, accelX, accelY, accelZ, worldIn);
+    }
 
     /**
      * Called when this EntityFireball hits a block or entity.
@@ -47,13 +56,19 @@ public class WandSnowballEntity extends ProjectileItemEntity {
         super.onImpact(result);
         if (!this.world.isRemote) {
             boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.world, this.func_234616_v_());
-            this.world.createExplosion((Entity)null, this.getPosX(), this.getPosY(), this.getPosZ(), (float)this.explosionPower, flag, flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
+            this.world.playSound(this.getPosX(),this.getPosY(),this.getPosZ(), SoundEvents.ENTITY_SPIDER_AMBIENT, SoundCategory.HOSTILE,1.0F,1.0F,true);
+            World world = this.getEntityWorld();
+            world.addParticle(ParticleTypes.ITEM_SLIME,this.getPosX(),this.getPosY()+0.5,this.getPosZ(),0,1,0);
+            world.addParticle(ParticleTypes.ITEM_SLIME,this.getPosX(),this.getPosY()+1.5,this.getPosZ(),0,1,0);
+            world.addParticle(ParticleTypes.ITEM_SLIME,this.getPosX(),this.getPosY()+1.0,this.getPosZ(),0,1,0);
+
+            // this.world.createExplosion((Entity)null, this.getPosX(), this.getPosY(), this.getPosZ(), (float)this.explosionPower, flag, flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
             Vector3d victor = result.getHitVec();
             AxisAlignedBB aabb = new AxisAlignedBB(this.getPosX()-explosionRadius,this.getPosY()-explosionRadius,this.getPosZ()-explosionRadius,
-                    this.getPosX()+1.5,this.getPosY()+explosionRadius,this.getPosZ()+explosionRadius);
+                    this.getPosX()+explosionRadius,this.getPosY()+explosionRadius,this.getPosZ()+explosionRadius);
             for(LivingEntity e:this.world.getEntitiesWithinAABB(LivingEntity.class,aabb)) {
                 e.attackEntityFrom(DamageSource.MAGIC,5);
-                e.addPotionEffect(new EffectInstance(Effects.SLOWNESS,100,0));
+                e.addPotionEffect(new EffectInstance(Effects.POISON,80,1));
             }
             this.remove();
         }
@@ -92,13 +107,14 @@ public class WandSnowballEntity extends ProjectileItemEntity {
 
     }
 
-    @Override
-    public void setItem(ItemStack stack) {
-        super.setItem(stack);
+    protected ItemStack getStack() {
+        return new ItemStack(Items.SLIME_BALL);
     }
 
-    @Override
-    protected Item getDefaultItem() {
-        return Items.SNOWBALL;
+    @OnlyIn(Dist.CLIENT)
+    public ItemStack getItem() {
+        ItemStack itemstack = this.getStack();
+        return itemstack.isEmpty() ? new ItemStack(Items.SLIME_BALL) : itemstack;
     }
+
 }

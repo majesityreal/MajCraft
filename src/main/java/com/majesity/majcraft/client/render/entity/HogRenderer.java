@@ -1,7 +1,7 @@
-package com.majesity.majcraft.client.render;
+package com.majesity.majcraft.client.render.entity;
 
 import com.majesity.majcraft.MajCraft;
-import com.majesity.majcraft.client.model.HogModel;
+import com.majesity.majcraft.client.model.entity.HogModel;
 import com.majesity.majcraft.entities.HogEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

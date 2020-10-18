@@ -1,12 +1,10 @@
-package com.majesity.majcraft.client.render;
+package com.majesity.majcraft.client.render.entity;
 
 import com.majesity.majcraft.MajCraft;
-import com.majesity.majcraft.client.model.BirdModel;
+import com.majesity.majcraft.client.model.entity.BirdModel;
 import com.majesity.majcraft.entities.BirdEntity.BirdEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.entity.passive.ChickenEntity;
-import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 

@@ -1,10 +1,8 @@
 package com.majesity.majcraft.items;
 
 import com.majesity.majcraft.MajCraft;
-import com.majesity.majcraft.entities.WandFireballEntity;
-import net.minecraft.entity.Entity;
+import com.majesity.majcraft.entities.projectile.WandFireballEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;

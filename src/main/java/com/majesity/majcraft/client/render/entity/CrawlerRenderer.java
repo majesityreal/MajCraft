@@ -1,10 +1,8 @@
-package com.majesity.majcraft.client.render;
+package com.majesity.majcraft.client.render.entity;
 
 import com.majesity.majcraft.MajCraft;
-import com.majesity.majcraft.client.model.CrawlerModel;
-import com.majesity.majcraft.client.model.HogModel;
+import com.majesity.majcraft.client.model.entity.CrawlerModel;
 import com.majesity.majcraft.entities.CrawlerEntity;
-import com.majesity.majcraft.entities.HogEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -23,3 +21,5 @@ public class CrawlerRenderer extends MobRenderer<CrawlerEntity, CrawlerModel<Cra
         return TEXTURE;
     }
 }
+
+

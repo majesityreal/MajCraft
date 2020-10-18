@@ -1,4 +1,4 @@
-package com.majesity.majcraft.client.model;
+package com.majesity.majcraft.client.model.entity;
 // Made with Blockbench 3.6.3
 
 import com.majesity.majcraft.entities.BirdEntity.BirdEntity;

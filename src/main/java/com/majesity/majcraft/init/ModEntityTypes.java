@@ -4,14 +4,19 @@ import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.entities.BirdEntity.BirdEntity;
 import com.majesity.majcraft.entities.CrawlerEntity;
 import com.majesity.majcraft.entities.HogEntity;
+import com.majesity.majcraft.entities.projectile.AbstractCrawlerVenomEntity;
+import com.majesity.majcraft.entities.projectile.CrawlerVenomEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class ModEntityTypes {
+public class ModEntityTypes<T extends Entity> extends net.minecraftforge.registries.ForgeRegistryEntry<EntityType<?>> {
 
     public static DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, MajCraft.MOD_ID);
 
@@ -28,8 +33,17 @@ public class ModEntityTypes {
     );
     public static final RegistryObject<EntityType<CrawlerEntity>> CRAWLER = ENTITY_TYPES.register("crawler",
             () -> EntityType.Builder.create(CrawlerEntity::new, EntityClassification.MONSTER)
-                    .size(0.4f,0.4f)
+                    .size(1.5f,0.6f)
                     .build(new ResourceLocation(MajCraft.MOD_ID, "crawler").toString())
     );
+
+    // Projectile Entity Types
+      public static final RegistryObject<EntityType<CrawlerVenomEntity>> CRAWLER_VENOM = ENTITY_TYPES.register("crawler_venom",
+            () -> EntityType.Builder.<CrawlerVenomEntity>create(CrawlerVenomEntity::new, EntityClassification.MISC)
+                    .size(1.0f,0.5f)
+                    .build(new ResourceLocation(MajCraft.MOD_ID, "crawler_venom").toString())
+    );
+
+
 
 }

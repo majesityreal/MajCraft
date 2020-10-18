@@ -1,9 +1,9 @@
 package com.majesity.majcraft.util;
 
 import com.majesity.majcraft.MajCraft;
-import com.majesity.majcraft.client.render.BirdRenderer;
-import com.majesity.majcraft.client.render.CrawlerRenderer;
-import com.majesity.majcraft.client.render.HogRenderer;
+import com.majesity.majcraft.client.render.entity.BirdRenderer;
+import com.majesity.majcraft.client.render.entity.CrawlerRenderer;
+import com.majesity.majcraft.client.render.entity.HogRenderer;
 import com.majesity.majcraft.init.ModEntityTypes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

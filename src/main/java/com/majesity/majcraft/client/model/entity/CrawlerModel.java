@@ -1,4 +1,4 @@
-package com.majesity.majcraft.client.model;
+package com.majesity.majcraft.client.model.entity;
 // Made with Blockbench 3.6.6
 
 import com.majesity.majcraft.entities.CrawlerEntity;
@@ -136,27 +136,33 @@ public class CrawlerModel<T extends CrawlerEntity> extends EntityModel<T> {
 		this.leftLeg3.rotateAngleZ = ((float)Math.PI / 4);
 		this.leftLeg4.rotateAngleZ = -((float)Math.PI / 4); */
 
-		// this controls the side to side movement of the legs as the spider walks
-		this.leftLeg1.rotateAngleY = -MathHelper.cos(limbSwing);
-		this.leftLeg2.rotateAngleY = -MathHelper.cos(limbSwing);
-		this.leftLeg3.rotateAngleY = -MathHelper.cos(limbSwing);
-		this.leftLeg4.rotateAngleY = -MathHelper.cos(limbSwing);
-
 		// this is where the legs will be at rest
 		this.rightLeg1.rotateAngleY = (float)(Math.PI/4);
 		this.rightLeg2.rotateAngleY = (float)(Math.PI/8);
 		this.rightLeg3.rotateAngleY = -(float)(Math.PI/8);
 		this.rightLeg4.rotateAngleY = -(float)(Math.PI/4);
-
+		this.leftLeg1.rotateAngleY = -(float)(Math.PI/4);
+		this.leftLeg2.rotateAngleY = -(float)(Math.PI/8);
+		this.leftLeg3.rotateAngleY = (float)(Math.PI/8);
+		this.leftLeg4.rotateAngleY = (float)(Math.PI/4);
 		// this actually rotates the legs as it is moving
-		float f1 = 2.0F * MathHelper.cos(limbSwing+(0.25F*(float)Math.PI))*limbSwingAmount;
-		float f2 = 0.75F * MathHelper.cos(limbSwing+(-0.25F*(float)Math.PI))*limbSwingAmount;
-		float f3 = 0.75F * MathHelper.cos(limbSwing+(0.25F*(float)Math.PI))*limbSwingAmount;
-		float f4 = 2.0F * MathHelper.cos(limbSwing+(-0.25F*(float)Math.PI))*limbSwingAmount;
-		this.rightLeg1.rotateAngleY += f1; //2.0F * MathHelper.cos(limbSwing+(0.25F*(float)Math.PI))*limbSwingAmount;
-		this.rightLeg2.rotateAngleY += f2; //0.75F * MathHelper.cos(limbSwing+(-0.25F*(float)Math.PI))*limbSwingAmount;
-		this.rightLeg3.rotateAngleY += f3; //0.75F * MathHelper.cos(limbSwing+(0.25F*(float)Math.PI))*limbSwingAmount;
-		this.rightLeg4.rotateAngleY += f4; //2.0F * MathHelper.cos(limbSwing+(-0.25F*(float)Math.PI))*limbSwingAmount;
+		float r1 = 0.88F * MathHelper.cos(1.2F*limbSwing+(0.25F*(float)Math.PI))*limbSwingAmount;
+		float r2 = 0.75F * MathHelper.cos(limbSwing+(-0.25F*(float)Math.PI))*limbSwingAmount;
+		float r3 = 0.75F * MathHelper.cos(limbSwing+(0.25F*(float)Math.PI))*limbSwingAmount;
+		float r4 = 0.88F * MathHelper.cos(1.2F*limbSwing+(-0.25F*(float)Math.PI))*limbSwingAmount;
+		float l1 = -0.88F * MathHelper.cos(1.2F*limbSwing+(0.25F*(float)Math.PI))*limbSwingAmount;
+		float l2 = -0.75F * MathHelper.cos(limbSwing+(-0.25F*(float)Math.PI))*limbSwingAmount;
+		float l3 = -0.75F * MathHelper.cos(limbSwing+(0.25F*(float)Math.PI))*limbSwingAmount;
+		float l4 = -0.88F * MathHelper.cos(1.2F*limbSwing+(-0.25F*(float)Math.PI))*limbSwingAmount;
+		this.rightLeg1.rotateAngleY += r1; //2.0F * MathHelper.cos(limbSwing+(0.25F*(float)Math.PI))*limbSwingAmount;
+		this.rightLeg2.rotateAngleY += r2; //0.75F * MathHelper.cos(limbSwing+(-0.25F*(float)Math.PI))*limbSwingAmount;
+		this.rightLeg3.rotateAngleY += r3; //0.75F * MathHelper.cos(limbSwing+(0.25F*(float)Math.PI))*limbSwingAmount;
+		this.rightLeg4.rotateAngleY += r4; //2.0F * MathHelper.cos(limbSwing+(-0.25F*(float)Math.PI))*limbSwingAmount;
+		this.leftLeg1.rotateAngleY += l1; //2.0F * MathHelper.cos(limbSwing+(0.25F*(float)Math.PI))*limbSwingAmount;
+		this.leftLeg2.rotateAngleY += l2; //0.75F * MathHelper.cos(limbSwing+(-0.25F*(float)Math.PI))*limbSwingAmount;
+		this.leftLeg3.rotateAngleY += l3; //0.75F * MathHelper.cos(limbSwing+(0.25F*(float)Math.PI))*limbSwingAmount;
+		this.leftLeg4.rotateAngleY += l4; //2.0F * MathHelper.cos(limbSwing+(-0.25F*(float)Math.PI))*limbSwingAmount;
+
 //		this.rightLeg3.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F); slows the right side down
 	}
 

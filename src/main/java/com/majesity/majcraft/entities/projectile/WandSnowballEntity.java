@@ -1,11 +1,16 @@
-package com.majesity.majcraft.entities;
+package com.majesity.majcraft.entities.projectile;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
+import net.minecraft.entity.projectile.ProjectileItemEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.EntityRayTraceResult;
@@ -16,22 +21,24 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class WandFireballEntity extends AbstractFireballEntity {
+public class WandSnowballEntity extends ProjectileItemEntity {
     public int explosionPower = 0;
     public double explosionRadius = 1.5;
 
-    public WandFireballEntity(EntityType<? extends net.minecraft.entity.projectile.FireballEntity> p_i50163_1_, World p_i50163_2_) {
-        super(p_i50163_1_, p_i50163_2_);
+    public WandSnowballEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn) {
+        super(type, worldIn);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public WandFireballEntity(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
-        super(EntityType.FIREBALL, x, y, z, accelX, accelY, accelZ, worldIn);
+    public WandSnowballEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
+        super(type, x, y, z, worldIn);
+        this.setVelocity(accelX,accelY,accelZ);
     }
 
-    public WandFireballEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
-        super(EntityType.FIREBALL, shooter, accelX, accelY, accelZ, worldIn);
-    }
+    /*
+    public WandSnowballEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
+        super(EntityType.SNOWBALL, shooter, accelX, accelY, accelZ, worldIn);
+    } */
 
     /**
      * Called when this EntityFireball hits a block or entity.
@@ -43,52 +50,10 @@ public class WandFireballEntity extends AbstractFireballEntity {
             this.world.createExplosion((Entity)null, this.getPosX(), this.getPosY(), this.getPosZ(), (float)this.explosionPower, flag, flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
             Vector3d victor = result.getHitVec();
             AxisAlignedBB aabb = new AxisAlignedBB(this.getPosX()-explosionRadius,this.getPosY()-explosionRadius,this.getPosZ()-explosionRadius,
-                    this.getPosX()+1.5,this.getPosY()+explosionRadius,this.getPosZ()+explosionRadius);
+                    this.getPosX()+explosionRadius,this.getPosY()+explosionRadius,this.getPosZ()+explosionRadius);
             for(LivingEntity e:this.world.getEntitiesWithinAABB(LivingEntity.class,aabb)) {
                 e.attackEntityFrom(DamageSource.MAGIC,5);
-                double xDiff = e.getPosX() - this.getPosX();
-                double yDiff = e.getPosY() - this.getPosY();
-                double zDiff = e.getPosZ() - this.getPosZ();
-                if(Math.abs(xDiff)<0.5)
-                    if(xDiff>0)
-                        xDiff = 0.7;
-                    else
-                        xDiff = -0.7;
-                else
-                    if(xDiff>0)
-                        xDiff = 0.5;
-                    else
-                        xDiff = -0.5;
-
-                if(Math.abs(yDiff)<0.5)
-                    yDiff = 0.50;
-                else
-                    yDiff = 0.45;
-
-                if(Math.abs(zDiff)<0.5)
-                    if(zDiff>0)
-                        zDiff = 0.7;
-                    else
-                        zDiff = -0.7;
-                else
-                    if(zDiff>0)
-                        zDiff = 0.5;
-                    else
-                        zDiff = -0.5;
-
-               /* if(xDiff>0)
-                    xDiff = explosionRadius-xDiff;
-                else
-                    xDiff = explosionRadius+xDiff;
-                if(yDiff>0)
-                    yDiff = explosionRadius-yDiff;
-                else
-                    yDiff = explosionRadius+yDiff;
-                if(zDiff>0)
-                    xDiff = explosionRadius-zDiff;
-                else
-                    zDiff = explosionRadius+zDiff; */
-                e.addVelocity(xDiff, yDiff, zDiff);
+                e.addPotionEffect(new EffectInstance(Effects.SLOWNESS,100,0));
             }
             this.remove();
         }
@@ -103,7 +68,7 @@ public class WandFireballEntity extends AbstractFireballEntity {
         if (!this.world.isRemote) {
             Entity entity = p_213868_1_.getEntity();
             Entity entity1 = this.func_234616_v_();
-            entity.attackEntityFrom(DamageSource.func_233547_a_(this, entity1), 6.0F);
+            entity.attackEntityFrom(DamageSource.MAGIC, 6.0F);
             if (entity1 instanceof LivingEntity) {
                 this.applyEnchantments((LivingEntity)entity1, entity);
             }
@@ -126,4 +91,16 @@ public class WandFireballEntity extends AbstractFireballEntity {
         }
 
     }
+
+    @Override
+    public void setItem(ItemStack stack) {
+        super.setItem(new ItemStack(Items.SLIME_BALL));
+    }
+
+    @Override
+    protected Item getDefaultItem() {
+        return Items.SLIME_BALL;
+    }
+
+
 }
