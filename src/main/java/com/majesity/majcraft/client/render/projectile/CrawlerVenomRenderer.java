@@ -21,7 +21,7 @@ import net.minecraft.util.math.vector.Vector3f;
 
 public class CrawlerVenomRenderer<CrawlerVenomEntity extends Entity> extends EntityRenderer<CrawlerVenomEntity> {
 
-    protected static final ResourceLocation TEXTURE = new ResourceLocation(MajCraft.MOD_ID,"textures/items/chocolate.png");
+    protected static final ResourceLocation TEXTURE = new ResourceLocation(MajCraft.MOD_ID,"textures/entity/crawler.png");
 
 
     public CrawlerVenomRenderer(EntityRendererManager renderManagerIn) {
@@ -33,7 +33,7 @@ public class CrawlerVenomRenderer<CrawlerVenomEntity extends Entity> extends Ent
         return TEXTURE;
     }
 
-    public void render(CrawlerVenomEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+    /*public void render(CrawlerVenomEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
         matrixStackIn.push();
         int i = 0;
         float f = 0.0F;
@@ -81,7 +81,7 @@ public class CrawlerVenomRenderer<CrawlerVenomEntity extends Entity> extends Ent
 
     public void drawVertex(Matrix4f matrix, Matrix3f normals, IVertexBuilder vertexBuilder, int offsetX, int offsetY, int offsetZ, float textureX, float textureY, int p_229039_9_, int p_229039_10_, int p_229039_11_, int packedLightIn) {
         vertexBuilder.pos(matrix, (float)offsetX, (float)offsetY, (float)offsetZ).color(255, 255, 255, 255).tex(textureX, textureY).overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLightIn).normal(normals, (float)p_229039_9_, (float)p_229039_11_, (float)p_229039_10_).endVertex();
-    }
+    } */
 
 }
 

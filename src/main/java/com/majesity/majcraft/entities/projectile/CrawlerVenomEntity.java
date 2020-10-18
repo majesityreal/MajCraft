@@ -8,9 +8,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.entity.projectile.DragonFireballEntity;
 import net.minecraft.entity.projectile.SnowballEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -24,6 +26,8 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.FMLPlayMessages;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity implements IRendersAsItem {
     public int explosionPower = 0;
@@ -49,6 +53,19 @@ public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity implements IR
     public CrawlerVenomEntity(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
         super(ModEntityTypes.CRAWLER_VENOM.get(), x, y, z, accelX, accelY, accelZ, worldIn);
     }
+
+    public CrawlerVenomEntity(FMLPlayMessages.SpawnEntity packet, World worldIn)
+    {
+        super(ModEntityTypes.CRAWLER_VENOM.get(), worldIn);
+    }
+
+    @Override
+    public IPacket<?> createSpawnPacket()
+    {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+
 
     /**
      * Called when this EntityFireball hits a block or entity.
@@ -117,5 +134,6 @@ public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity implements IR
         ItemStack itemstack = this.getStack();
         return itemstack.isEmpty() ? new ItemStack(Items.SLIME_BALL) : itemstack;
     }
+
 
 }

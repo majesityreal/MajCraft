@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -60,6 +61,10 @@ public class AbstractCrawlerVenomEntity extends DamagingProjectileEntity impleme
     public ItemStack getItem() {
         ItemStack itemstack = this.getStack();
         return itemstack.isEmpty() ? new ItemStack(Items.SLIME_BALL) : itemstack;
+    }
+
+    protected Item getDefaultItem() {
+        return Items.SLIME_BALL;
     }
 
     protected void registerData() {

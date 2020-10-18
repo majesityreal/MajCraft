@@ -40,6 +40,7 @@ public class ModEntityTypes<T extends Entity> extends net.minecraftforge.registr
     // Projectile Entity Types
       public static final RegistryObject<EntityType<CrawlerVenomEntity>> CRAWLER_VENOM = ENTITY_TYPES.register("crawler_venom",
             () -> EntityType.Builder.<CrawlerVenomEntity>create(CrawlerVenomEntity::new, EntityClassification.MISC)
+                    .setCustomClientFactory(CrawlerVenomEntity::new)
                     .size(1.0f,0.5f)
                     .build(new ResourceLocation(MajCraft.MOD_ID, "crawler_venom").toString())
     );
