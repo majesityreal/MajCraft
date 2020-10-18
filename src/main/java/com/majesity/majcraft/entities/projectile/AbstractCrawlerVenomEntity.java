@@ -6,7 +6,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
-import net.minecraft.entity.projectile.DragonFireballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -23,7 +22,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
         _interface = IRendersAsItem.class
 )
 public class AbstractCrawlerVenomEntity extends DamagingProjectileEntity implements IRendersAsItem {
-    private static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(net.minecraft.entity.projectile.AbstractFireballEntity.class, DataSerializers.ITEMSTACK);
+    private static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(com.majesity.majcraft.entities.projectile.AbstractCrawlerVenomEntity.class, DataSerializers.ITEMSTACK);
 
     public AbstractCrawlerVenomEntity(EntityType<? extends AbstractCrawlerVenomEntity> p_i50167_1_, double p_i50167_2_, double p_i50167_4_, double p_i50167_6_, double p_i50167_8_, double p_i50167_10_, double p_i50167_12_, World p_i50167_14_) {
         super(p_i50167_1_, p_i50167_2_, p_i50167_4_, p_i50167_6_, p_i50167_8_, p_i50167_10_, p_i50167_12_, p_i50167_14_);
@@ -45,7 +44,7 @@ public class AbstractCrawlerVenomEntity extends DamagingProjectileEntity impleme
     }
 
     public void setStack(ItemStack p_213898_1_) {
-        if (p_213898_1_.getItem() != Items.FIRE_CHARGE || p_213898_1_.hasTag()) {
+        if (p_213898_1_.getItem() != Items.SLIME_BALL || p_213898_1_.hasTag()) {
             this.getDataManager().set(STACK, Util.make(p_213898_1_.copy(), (p_213897_0_) -> {
                 p_213897_0_.setCount(1);
             }));
@@ -60,7 +59,7 @@ public class AbstractCrawlerVenomEntity extends DamagingProjectileEntity impleme
     @OnlyIn(Dist.CLIENT)
     public ItemStack getItem() {
         ItemStack itemstack = this.getStack();
-        return itemstack.isEmpty() ? new ItemStack(Items.FIRE_CHARGE) : itemstack;
+        return itemstack.isEmpty() ? new ItemStack(Items.SLIME_BALL) : itemstack;
     }
 
     protected void registerData() {

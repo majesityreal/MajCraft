@@ -3,6 +3,7 @@ package com.majesity.majcraft.entities.projectile;
 import com.majesity.majcraft.init.ModEntityTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.entity.projectile.DragonFireballEntity;
@@ -24,7 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity {
+public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity implements IRendersAsItem {
     public int explosionPower = 0;
     public double explosionRadius = 2.0;
 

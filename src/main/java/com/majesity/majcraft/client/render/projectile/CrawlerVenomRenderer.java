@@ -21,7 +21,7 @@ import net.minecraft.util.math.vector.Vector3f;
 
 public class CrawlerVenomRenderer<CrawlerVenomEntity extends Entity> extends EntityRenderer<CrawlerVenomEntity> {
 
-    protected static final ResourceLocation TEXTURE = new ResourceLocation(MajCraft.MOD_ID,"textures/entity/crawler_venom.png");
+    protected static final ResourceLocation TEXTURE = new ResourceLocation(MajCraft.MOD_ID,"textures/items/chocolate.png");
 
 
     public CrawlerVenomRenderer(EntityRendererManager renderManagerIn) {

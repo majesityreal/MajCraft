@@ -4,6 +4,7 @@ import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.client.render.entity.BirdRenderer;
 import com.majesity.majcraft.client.render.entity.CrawlerRenderer;
 import com.majesity.majcraft.client.render.entity.HogRenderer;
+import com.majesity.majcraft.client.render.projectile.CrawlerVenomRenderer;
 import com.majesity.majcraft.init.ModEntityTypes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,6 +20,7 @@ public class ClientEventBusSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.HOG.get(), HogRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BIRD.get(), BirdRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CRAWLER.get(), CrawlerRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CRAWLER_VENOM.get(), CrawlerVenomRenderer::new);
     }
 
 }
