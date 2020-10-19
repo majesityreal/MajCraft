@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -13,35 +14,43 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.IParticleData;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.Util;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.FMLPlayMessages;
 
 @OnlyIn(
         value = Dist.CLIENT,
         _interface = IRendersAsItem.class
 )
-public class AbstractCrawlerVenomEntity extends DamagingProjectileEntity implements IRendersAsItem {
+public class AbstractCrawlerVenomEntity extends ProjectileItemEntity implements IRendersAsItem {
     private static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(com.majesity.majcraft.entities.projectile.AbstractCrawlerVenomEntity.class, DataSerializers.ITEMSTACK);
 
-    public AbstractCrawlerVenomEntity(EntityType<? extends AbstractCrawlerVenomEntity> p_i50167_1_, double p_i50167_2_, double p_i50167_4_, double p_i50167_6_, double p_i50167_8_, double p_i50167_10_, double p_i50167_12_, World p_i50167_14_) {
-        super(p_i50167_1_, p_i50167_2_, p_i50167_4_, p_i50167_6_, p_i50167_8_, p_i50167_10_, p_i50167_12_, p_i50167_14_);
+    public AbstractCrawlerVenomEntity(EntityType<? extends AbstractCrawlerVenomEntity> type, double x, double y, double z, double accelX, double accelY, double accelZ, World world) {
+        super(type, x, y, z, world);
     }
 
     //
 
     @OnlyIn(Dist.CLIENT)
     public AbstractCrawlerVenomEntity(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
-        super(ModEntityTypes.CRAWLER_VENOM.get(), x, y, z, accelX, accelY, accelZ, worldIn);
+        super(ModEntityTypes.CRAWLER_VENOM.get(), x, y, z, worldIn);
     }
 
     public AbstractCrawlerVenomEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
-        super(ModEntityTypes.CRAWLER_VENOM.get(), shooter, accelX, accelY, accelZ, worldIn);
+        super(ModEntityTypes.CRAWLER_VENOM.get(), shooter, worldIn);
     }
 
-    public AbstractCrawlerVenomEntity(EntityType<DamagingProjectileEntity> entityEntityType, World world) {
+    public AbstractCrawlerVenomEntity(EntityType<ProjectileItemEntity> entityEntityType, World world) {
         super(entityEntityType,world);
+    }
+
+    public AbstractCrawlerVenomEntity(FMLPlayMessages.SpawnEntity packet, World worldIn)
+    {
+        super(ModEntityTypes.CRAWLER_VENOM.get(), worldIn);
     }
 
     public void setStack(ItemStack p_213898_1_) {
@@ -87,5 +96,9 @@ public class AbstractCrawlerVenomEntity extends DamagingProjectileEntity impleme
         super.readAdditional(compound);
         ItemStack itemstack = ItemStack.read(compound.getCompound("Item"));
         this.setStack(itemstack);
+    }
+
+    protected IParticleData getParticle() {
+        return ParticleTypes.DRAGON_BREATH;
     }
 }

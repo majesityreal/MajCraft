@@ -7,6 +7,7 @@ import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.entity.projectile.DragonFireballEntity;
+import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -37,8 +38,8 @@ public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity implements IR
         super(type, worldIn);
     }*/
 
-    public CrawlerVenomEntity(EntityType<? extends DamagingProjectileEntity> entity, World world) {
-        super((EntityType<DamagingProjectileEntity>) entity, world);
+    public CrawlerVenomEntity(EntityType<? extends ProjectileItemEntity> entity, World world) {
+        super((EntityType<ProjectileItemEntity>) entity, world);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -56,7 +57,7 @@ public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity implements IR
 
     public CrawlerVenomEntity(FMLPlayMessages.SpawnEntity packet, World worldIn)
     {
-        super(ModEntityTypes.CRAWLER_VENOM.get(), worldIn);
+        super(packet, worldIn);
     }
 
     @Override
@@ -135,5 +136,8 @@ public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity implements IR
         return itemstack.isEmpty() ? new ItemStack(Items.SLIME_BALL) : itemstack;
     }
 
-
+    @Override
+    protected Item getDefaultItem() {
+        return super.getDefaultItem();
+    }
 }
