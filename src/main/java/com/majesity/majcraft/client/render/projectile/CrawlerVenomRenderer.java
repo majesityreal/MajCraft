@@ -23,12 +23,11 @@ import net.minecraft.util.math.vector.Vector3f;
 
 public class CrawlerVenomRenderer extends EntityRenderer<CrawlerVenomEntity> implements IEntityRenderer<CrawlerVenomEntity, CrawlerVenomModel<CrawlerVenomEntity>> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(MajCraft.MOD_ID,"textures/entities/projectile/crawler_venom.png");
-    private CrawlerVenomModel<CrawlerVenomEntity> entityModel;
+    public static final ResourceLocation TEXTURE = new ResourceLocation(MajCraft.MOD_ID,"textures/entity/projectile/crawler_venom.png");
+    private CrawlerVenomModel<CrawlerVenomEntity> entityModel = new CrawlerVenomModel<>();
 
     public CrawlerVenomRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
-        this.entityModel = new CrawlerVenomModel<>();
         MajCraft.LOGGER.info("crawler venom Renderer constructor called");
     }
 
@@ -45,10 +44,12 @@ public class CrawlerVenomRenderer extends EntityRenderer<CrawlerVenomEntity> imp
     }
 
     public void render(CrawlerVenomEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+        // matrixStackIn.push();
+        IVertexBuilder ivertexbuilder = bufferIn.getBuffer(this.entityModel.getRenderType(TEXTURE));
+        matrixStackIn.translate(0.0,-1.0,0.0);
+        this.entityModel.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        // matrixStackIn.pop();
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-        entityIn.setGlowing(true);
-        entityIn.setFire(100);
-        MajCraft.LOGGER.info("Renderer called");
     }
 
 }

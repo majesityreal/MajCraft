@@ -1,6 +1,7 @@
 package com.majesity.majcraft.entities.projectile;
 
 import com.majesity.majcraft.init.ModEntityTypes;
+import com.sun.javafx.geom.Vec3d;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRendersAsItem;
@@ -24,11 +25,14 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
+import org.apache.commons.lang3.RandomUtils;
 
 public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity implements IRendersAsItem {
     public int explosionPower = 0;
@@ -40,6 +44,7 @@ public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity implements IR
 
     public CrawlerVenomEntity(EntityType<? extends ProjectileItemEntity> entity, World world) {
         super((EntityType<ProjectileItemEntity>) entity, world);
+        this.setStack(Items.SLIME_BALL.getDefaultInstance());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -73,15 +78,31 @@ public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity implements IR
      */
     protected void onImpact(RayTraceResult result) {
         super.onImpact(result);
+        // this is for spawning the particles on the impact
+        if (this.world.isRemote) {
+            Vector3d vec3d = this.getMotion();
+            double d0 = this.getPosX() + vec3d.x;
+            double d1 = this.getPosY() + vec3d.y;
+            double d2 = this.getPosZ() + vec3d.z;
+            world.addParticle(ParticleTypes.ITEM_SLIME,d0,this.getPosY()+0.5,d2,vec3d.x,1,vec3d.z);
+            world.addParticle(ParticleTypes.ITEM_SLIME,d0,this.getPosY()+0.5,d2,0,1,0);
+            world.addParticle(ParticleTypes.ITEM_SLIME,this.getPosX(),this.getPosY()+0.5,this.getPosZ(),0,1,0);
+
+            world.addParticle(ParticleTypes.ITEM_SLIME,this.getPosX()+0.5,this.getPosY()+0.5,this.getPosZ()+0.5,1,0.5,1);
+            world.addParticle(ParticleTypes.ITEM_SLIME,this.getPosX()+0.5,this.getPosY()+0.5,this.getPosZ()-0.5,1,0.5,-1);
+            world.addParticle(ParticleTypes.ITEM_SLIME,this.getPosX()-0.5,this.getPosY()+0.5,this.getPosZ()+0.5,-1,0.5,1);
+            world.addParticle(ParticleTypes.ITEM_SLIME,this.getPosX()-0.5,this.getPosY()+0.5,this.getPosZ()-0.5,-1,0.5,-1);
+
+            this.world.playSound(this.getPosX(),this.getPosY(),this.getPosZ(),SoundEvents.ENTITY_SLIME_SQUISH,SoundCategory.HOSTILE,1.0F,1.0F,true);
+        }
         if (!this.world.isRemote) {
             boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.world, this.func_234616_v_());
             this.world.playSound(this.getPosX(),this.getPosY(),this.getPosZ(), SoundEvents.ENTITY_SPIDER_AMBIENT, SoundCategory.HOSTILE,1.0F,1.0F,true);
-            World world = this.getEntityWorld();
-            world.addParticle(ParticleTypes.ITEM_SLIME,this.getPosX(),this.getPosY()+0.5,this.getPosZ(),0,1,0);
-            world.addParticle(ParticleTypes.ITEM_SLIME,this.getPosX(),this.getPosY()+1.5,this.getPosZ(),0,1,0);
-            world.addParticle(ParticleTypes.ITEM_SLIME,this.getPosX(),this.getPosY()+1.0,this.getPosZ(),0,1,0);
+            ServerWorld world = (ServerWorld) this.world;
+            //World world = this.getEntityWorld();
+            // this.getServer().getWorld();
 
-            // this.world.createExplosion((Entity)null, this.getPosX(), this.getPosY(), this.getPosZ(), (float)this.explosionPower, flag, flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
+            // this.world.createExplosion((Entity)this, this.getPosX(), this.getPosY(), this.getPosZ(), (float)this.explosionPower, flag, flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
             Vector3d victor = result.getHitVec();
             AxisAlignedBB aabb = new AxisAlignedBB(this.getPosX()-explosionRadius,this.getPosY()-explosionRadius,this.getPosZ()-explosionRadius,
                     this.getPosX()+explosionRadius,this.getPosY()+explosionRadius,this.getPosZ()+explosionRadius);
@@ -108,6 +129,19 @@ public class CrawlerVenomEntity extends AbstractCrawlerVenomEntity implements IR
             }
 
         }
+    }
+
+    public void tick() {
+            super.tick();
+            if(this.world.isRemote) {
+                Vector3d vec3d = this.getMotion();
+                double d0 = this.getPosX() + vec3d.x;
+                double d1 = this.getPosY() + vec3d.y;
+                double d2 = this.getPosZ() + vec3d.z;
+                if (RandomUtils.nextBoolean()) {
+                    this.world.addParticle(ParticleTypes.ITEM_SLIME, d0 - vec3d.x * 0.25D, d1 - vec3d.y * 0.25D, d2 - vec3d.z * 0.25D, vec3d.x, vec3d.y, vec3d.z);
+                }
+            }
     }
 
     public void writeAdditional(CompoundNBT compound) {
