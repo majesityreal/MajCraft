@@ -2,6 +2,7 @@ package com.majesity.majcraft.client.render.projectile;
 
 import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.client.model.entity.CrawlerModel;
+import com.majesity.majcraft.client.model.projectile.CrawlerVenomModel;
 import com.majesity.majcraft.entities.CrawlerEntity;
 import com.majesity.majcraft.entities.projectile.CrawlerVenomEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.Entity;
@@ -19,18 +21,26 @@ import net.minecraft.util.math.vector.Matrix3f;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class CrawlerVenomRenderer<CrawlerVenomEntity extends Entity> extends EntityRenderer<CrawlerVenomEntity> {
+public class CrawlerVenomRenderer extends EntityRenderer<CrawlerVenomEntity> implements IEntityRenderer<CrawlerVenomEntity, CrawlerVenomModel<CrawlerVenomEntity>> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(MajCraft.MOD_ID,"");
-
+    public static final ResourceLocation TEXTURE = new ResourceLocation(MajCraft.MOD_ID,"textures/entities/projectile/crawler_venom.png");
+    private CrawlerVenomModel<CrawlerVenomEntity> entityModel;
 
     public CrawlerVenomRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
+        this.entityModel = new CrawlerVenomModel<>();
+        MajCraft.LOGGER.info("crawler venom Renderer constructor called");
+    }
+
+    @Override
+    public CrawlerVenomModel<CrawlerVenomEntity> getEntityModel() {
+        MajCraft.LOGGER.info("FETCHING CRAWLER VENOM MODEL MY LAD");
+        return entityModel;
     }
 
     @Override
     public ResourceLocation getEntityTexture(CrawlerVenomEntity entity) {
-        MajCraft.LOGGER.info("FETCHING TEXTURE MY LAD");
+        MajCraft.LOGGER.info("FETCHING CRAWLER VENOM TEXTURE MY LAD");
         return TEXTURE;
     }
 

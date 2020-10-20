@@ -1,15 +1,16 @@
-package com.majesity.majcraft.client.model.entity;
+package com.majesity.majcraft.client.model.projectile;
 // Made with Blockbench 3.6.6
 
 import com.majesity.majcraft.MajCraft;
 import com.majesity.majcraft.entities.CrawlerEntity;
+import com.majesity.majcraft.entities.projectile.CrawlerVenomEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
 
-public class CrawlerModel<T extends CrawlerEntity> extends EntityModel<T> {
+public class CrawlerVenomModel<T extends CrawlerVenomEntity> extends EntityModel<T> {
 	private final ModelRenderer head;
 	private final ModelRenderer neck;
 	private final ModelRenderer body;
@@ -30,7 +31,8 @@ public class CrawlerModel<T extends CrawlerEntity> extends EntityModel<T> {
 	private final ModelRenderer rightLeg4;
 	private final ModelRenderer rightLeg4Ext;
 
-	public CrawlerModel() {
+	public CrawlerVenomModel() {
+		MajCraft.LOGGER.info("venom crawler VENOM MODEL constructor called VENOM MODEL");
 		textureWidth = 128;
 		textureHeight = 128;
 

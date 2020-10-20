@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class CrawlerRenderer extends MobRenderer<CrawlerEntity, CrawlerModel<CrawlerEntity>> {
 
-    protected static final ResourceLocation TEXTURE = new ResourceLocation(MajCraft.MOD_ID,"textures/entity/projectile/crawler_venom.png");
+    protected static final ResourceLocation TEXTURE = new ResourceLocation(MajCraft.MOD_ID,"textures/entity/crawler.png");
 
 
     public CrawlerRenderer(EntityRendererManager renderManagerIn) {
@@ -18,8 +18,6 @@ public class CrawlerRenderer extends MobRenderer<CrawlerEntity, CrawlerModel<Cra
 
     @Override
     public ResourceLocation getEntityTexture(CrawlerEntity entity) {
-        MajCraft.LOGGER.info("FETCHING CRAWLER TEXTURE MY LAD");
-
         return TEXTURE;
     }
 }
