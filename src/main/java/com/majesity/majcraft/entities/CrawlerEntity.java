@@ -1,6 +1,8 @@
 package com.majesity.majcraft.entities;
 
 import com.majesity.majcraft.MajCraft;
+import com.majesity.majcraft.entities.goals.CrawlerMeleeAttackGoal;
+import com.majesity.majcraft.entities.goals.CrawlerRangedAttackGoal;
 import com.majesity.majcraft.entities.projectile.CrawlerVenomEntity;
 import com.majesity.majcraft.init.ModEntityTypes;
 import net.minecraft.block.BlockState;
@@ -30,12 +32,12 @@ import java.util.List;
 
 public class CrawlerEntity extends MonsterEntity implements IRangedAttackMob {
 
-    private final RangedBowAttackGoal<CrawlerEntity> aiSpitAttack = new RangedBowAttackGoal<>(this, 1.0D, 20, 30.0F);
-    private final MeleeAttackGoal aiCollideAttack = new MeleeAttackGoal(this, 1.0D, true);
+    private RangedBowAttackGoal<CrawlerEntity> aiSpitAttack = new RangedBowAttackGoal<>(this, 1.0D, 20, 30.0F);
+    private MeleeAttackGoal aiCollideAttack = new MeleeAttackGoal(this, 1.0D, false);
 
         public CrawlerEntity(EntityType<? extends CrawlerEntity> type, World worldIn) {
         super(type, worldIn);
-    }
+        }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.func_233666_p_()
@@ -49,6 +51,9 @@ public class CrawlerEntity extends MonsterEntity implements IRangedAttackMob {
     @Override
     protected void registerGoals() {
         super.registerGoals();
+        MajCraft.LOGGER.info("Calling the GOAL REGISTERERERERRR");
+        this.goalSelector.addGoal(1, new CrawlerMeleeAttackGoal(this,1.0D,true,8.0));
+        this.goalSelector.addGoal(1, new CrawlerRangedAttackGoal<>(this, 1.0, 20, 30.0f, 8.0));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this,1.0D));
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
@@ -56,6 +61,7 @@ public class CrawlerEntity extends MonsterEntity implements IRangedAttackMob {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
+    /*
     public void setCombatTask() {
             // the this world is remote method may not be working because of the server
         if (this.world != null && this.world.isRemote) {
@@ -91,7 +97,7 @@ public class CrawlerEntity extends MonsterEntity implements IRangedAttackMob {
             }
         }
 
-    }
+    } */
 
     @Override
     protected int getExperiencePoints(PlayerEntity player) {
@@ -115,13 +121,13 @@ public class CrawlerEntity extends MonsterEntity implements IRangedAttackMob {
         super.updateAITasks();
     }
 
-    @Override
+    /* @Override
     public void livingTick() {
         if(this.world.isRemote) {
             setCombatTask();
         }
         super.livingTick();
-    }
+    } */
 
     @OnlyIn(Dist.CLIENT)
     public void handleStatusUpdate(byte id) {
@@ -139,7 +145,8 @@ public class CrawlerEntity extends MonsterEntity implements IRangedAttackMob {
     // THIS IS THE RANGED ATTACK INTERFACE THAT I NEED TO IMPLEMENT AND USE
     @Override
     public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
-        CrawlerVenomEntity venom = new CrawlerVenomEntity(ModEntityTypes.CRAWLER_VENOM.get(),this.world);
+        MajCraft.LOGGER.info("Shooting the Venom lolololol");
+        CrawlerVenomEntity venom = new CrawlerVenomEntity(ModEntityTypes.CRAWLER_VENOM.get(),this.world,this.getPosX(),this.getPosY(),this.getPosZ(),0,0,0);
         double d0 = target.getPosX() - this.getPosX();
         double d1 = target.getPosYHeight(0.3333333333333333D) - venom.getPosY();
         double d2 = target.getPosZ() - this.getPosZ();

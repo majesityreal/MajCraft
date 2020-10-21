@@ -28,18 +28,15 @@ public class CrawlerVenomRenderer extends EntityRenderer<CrawlerVenomEntity> imp
 
     public CrawlerVenomRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
-        MajCraft.LOGGER.info("crawler venom Renderer constructor called");
     }
 
     @Override
     public CrawlerVenomModel<CrawlerVenomEntity> getEntityModel() {
-        MajCraft.LOGGER.info("FETCHING CRAWLER VENOM MODEL MY LAD");
         return entityModel;
     }
 
     @Override
     public ResourceLocation getEntityTexture(CrawlerVenomEntity entity) {
-        MajCraft.LOGGER.info("FETCHING CRAWLER VENOM TEXTURE MY LAD");
         return TEXTURE;
     }
 
