@@ -51,9 +51,8 @@ public class CrawlerEntity extends MonsterEntity implements IRangedAttackMob {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        MajCraft.LOGGER.info("Calling the GOAL REGISTERERERERRR");
         this.goalSelector.addGoal(1, new CrawlerMeleeAttackGoal(this,1.0D,true,8.0));
-        this.goalSelector.addGoal(1, new CrawlerRangedAttackGoal<>(this, 1.0, 20, 30.0f, 8.0));
+        this.goalSelector.addGoal(1, new CrawlerRangedAttackGoal<>(this, 1.0, 60, 30.0f, 8.0));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this,1.0D));
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
@@ -145,13 +144,15 @@ public class CrawlerEntity extends MonsterEntity implements IRangedAttackMob {
     // THIS IS THE RANGED ATTACK INTERFACE THAT I NEED TO IMPLEMENT AND USE
     @Override
     public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
-        MajCraft.LOGGER.info("Shooting the Venom lolololol");
-        CrawlerVenomEntity venom = new CrawlerVenomEntity(ModEntityTypes.CRAWLER_VENOM.get(),this.world,this.getPosX(),this.getPosY(),this.getPosZ(),0,0,0);
+        CrawlerVenomEntity venom = new CrawlerVenomEntity(ModEntityTypes.CRAWLER_VENOM.get(),this.world,this.getPosX(),this.getPosY()+1.0d,this.getPosZ(),0,0,0);
         double d0 = target.getPosX() - this.getPosX();
         double d1 = target.getPosYHeight(0.3333333333333333D) - venom.getPosY();
         double d2 = target.getPosZ() - this.getPosZ();
         double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
-        venom.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
+        venom.shoot(d0,  d1 + d3 * (double)0.2F, d2, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
+        if (venom.getBoundingBox().contains(this.getPositionVec())) {
+            venom.getPosition().add(0,1,0);
+        }
         this.world.addEntity(venom);
     }
 }
