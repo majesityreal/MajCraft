@@ -1,4 +1,4 @@
-package com.majesity.majcraft.util;
+package com.majesity.majcraft.init;
 
 import com.majesity.majcraft.MajCraft;
 import net.minecraft.util.ResourceLocation;

@@ -10,16 +10,14 @@ import com.majesity.majcraft.init.*;
 import com.majesity.majcraft.proxy.ClientProxy;
 import com.majesity.majcraft.proxy.IProxy;
 import com.majesity.majcraft.proxy.ServerProxy;
-import com.majesity.majcraft.util.SoundInit;
-import net.java.games.input.Component;
-import net.java.games.input.Controller;
-import net.java.games.input.Keyboard;
+import com.majesity.majcraft.init.SoundInit;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.MinecraftForge;
@@ -64,6 +62,7 @@ public class MajCraft
         ModEntityTypes.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModTileEntities.TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModContainers.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModBiomes.BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         SoundInit.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
@@ -89,6 +88,9 @@ public class MajCraft
 
         // this registers the recipes for furnaces
         registerFurnaceRecipes();
+
+        // registers the biomes for spawning
+        ModBiomes.registerBiomes();
 
         // some preinit code
         // LOGGER.info("HELLO FROM PREINIT");
